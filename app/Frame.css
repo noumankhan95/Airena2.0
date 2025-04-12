@@ -1,0 +1,397 @@
+.frame,
+.frame * {
+  box-sizing: border-box;
+}
+.frame {
+  height: 4412px;
+  position: relative;
+  overflow: hidden;
+}
+.frame .clip-path-group {
+  height: auto;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  overflow: visible;
+}
+.frame .white-1-1 {
+  width: 6.53%;
+  height: 25px;
+  position: absolute;
+  right: 89.1%;
+  left: 4.38%;
+  top: 24px;
+  object-fit: cover;
+  aspect-ratio: 94/25;
+}
+.frame .image-12 {
+  width: 1440px;
+  height: 807px;
+  position: absolute;
+  left: 0px;
+  top: 75px;
+  object-fit: cover;
+  aspect-ratio: 1440/807;
+}
+.frame .frame-1 {
+  width: 1220.5px;
+  height: 410.17px;
+  position: absolute;
+  left: 110px;
+  top: 2236px;
+}
+.frame .rectangle-141 {
+  border-radius: 0px;
+  width: 1218.49px;
+  height: 409.42px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  overflow: visible;
+}
+.frame .rectangle-142 {
+  border-radius: 0px;
+  width: 257.92px;
+  height: 50.08px;
+  position: absolute;
+  left: 480.79px;
+  top: 235.89px;
+  overflow: visible;
+}
+.frame .join-the-big-tournament {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Inter-Black", sans-serif;
+  font-size: 27.545093536376953px;
+  font-weight: 900;
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  top: 95.16px;
+}
+.frame
+  .welcome-to-atrena-the-next-generation-streaming-platform-for-gamers-and-sports-enthusiasts-join-our-community-and-start-streaming-today {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 12.019676208496094px;
+  font-weight: 500;
+  position: absolute;
+  left: 417.18px;
+  top: 146.74px;
+  width: 384.13px;
+}
+.frame .united-kingdom {
+  color: #ff4656;
+  text-align: left;
+  font-family: "DrukWide-Medium", sans-serif;
+  font-size: 12.019676208496094px;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  position: absolute;
+  left: 73.62px;
+  top: 18.03px;
+  transform-origin: 0 0;
+  transform: rotate(90deg) scale(1, 1);
+}
+.frame .sage {
+  text-align: left;
+  font-family: "DrukWide-Medium", sans-serif;
+  font-size: 36.05902862548828px;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  position: absolute;
+  left: 1024.13px;
+  top: 20px;
+  transform-origin: 0 0;
+  transform: rotate(90deg) scale(1, 1);
+  -webkit-text-stroke: 1.001639723777771px #1f2326;
+}
+.frame .china {
+  color: #ff4656;
+  text-align: left;
+  font-family: "DrukWide-Medium", sans-serif;
+  font-size: 12.019676208496094px;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  position: absolute;
+  left: 977.05px;
+  top: 20px;
+  transform-origin: 0 0;
+  transform: rotate(90deg) scale(1, 1);
+}
+.frame ._1-vs-1 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Inter-Black", sans-serif;
+  font-size: 36.05902862548828px;
+  letter-spacing: 0.1em;
+  font-weight: 900;
+  position: absolute;
+  left: 556.41px;
+  top: 238.89px;
+}
+.frame .tanner {
+  border-radius: 0px 0px 0px 25px;
+  width: 383px;
+  height: 502px;
+  position: absolute;
+  left: 5px;
+  top: -93px;
+  object-fit: cover;
+}
+.frame .phoenix {
+  text-align: left;
+  font-family: "DrukWide-Medium", sans-serif;
+  font-size: 36.05902862548828px;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  position: absolute;
+  left: 58.09px;
+  top: 18.03px;
+  transform-origin: 0 0;
+  transform: rotate(90deg) scale(1, 1);
+  -webkit-text-stroke: 1.001639723777771px #46c190;
+}
+.frame .tyler {
+  border-radius: 0px 0px 0px 30px;
+  width: 418px;
+  height: 542px;
+  position: absolute;
+  left: 1218px;
+  top: -133px;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(-1, 1);
+  object-fit: cover;
+}
+.frame .ellipse-6 {
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 651px;
+  top: 3943px;
+}
+.frame .ellipse-12 {
+  background: #46c190;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 1px;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 651px;
+  top: 3943px;
+}
+.frame .ellipse-7 {
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 671px;
+  top: 3943px;
+}
+.frame .ellipse-8 {
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 691px;
+  top: 3943px;
+}
+.frame .ellipse-9 {
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 711px;
+  top: 3943px;
+}
+.frame .ellipse-10 {
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 731px;
+  top: 3943px;
+}
+.frame .ellipse-11 {
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 751px;
+  top: 3943px;
+}
+.frame .group-20 {
+  position: absolute;
+  inset: 0;
+}
+.frame .ellipse-62 {
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 664px;
+  top: 1414px;
+}
+.frame .ellipse-122 {
+  background: #46c190;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 1px;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 664px;
+  top: 1414px;
+}
+.frame .ellipse-72 {
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 684px;
+  top: 1414px;
+}
+.frame .ellipse-82 {
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 704px;
+  top: 1414px;
+}
+.frame .ellipse-92 {
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 724px;
+  top: 1414px;
+}
+.frame .ellipse-102 {
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 744px;
+  top: 1414px;
+}
+.frame .ellipse-112 {
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 764px;
+  top: 1414px;
+}
+.frame .group {
+  height: auto;
+  position: absolute;
+  left: 533px;
+  top: 1498px;
+  overflow: visible;
+}
+.frame .group2 {
+  width: 18.48%;
+  height: 0.91%;
+  position: absolute;
+  right: 80.69%;
+  left: 0.83%;
+  bottom: 63.55%;
+  top: 35.54%;
+  overflow: visible;
+}
+.frame .group3 {
+  width: 18.48%;
+  height: 0.91%;
+  position: absolute;
+  right: 61.31%;
+  left: 20.21%;
+  bottom: 63.55%;
+  top: 35.54%;
+  overflow: visible;
+}
+.frame .group4 {
+  width: 18.48%;
+  height: 0.91%;
+  position: absolute;
+  right: 41.87%;
+  left: 39.65%;
+  bottom: 63.55%;
+  top: 35.54%;
+  overflow: visible;
+}
+.frame .group5 {
+  width: 18.48%;
+  height: 0.91%;
+  position: absolute;
+  right: 22.28%;
+  left: 59.24%;
+  bottom: 63.55%;
+  top: 35.54%;
+  overflow: visible;
+}
+.frame .group6 {
+  width: 18.48%;
+  height: 0.91%;
+  position: absolute;
+  right: 2.21%;
+  left: 79.31%;
+  bottom: 63.55%;
+  top: 35.54%;
+  overflow: visible;
+}
+.frame .rectangle-145 {
+  border-radius: 0px;
+  width: 18px;
+  height: 36px;
+  position: absolute;
+  left: 551px;
+  top: 1500px;
+  overflow: visible;
+}
+.frame .rectangle-146 {
+  border-radius: 0px;
+  width: 18px;
+  height: 34px;
+  position: absolute;
+  left: 696px;
+  top: 1501px;
+  transform: translate(-16.63px, 0px);
+  overflow: visible;
+}
+.frame .rectangle-147 {
+  border-radius: 0px;
+  width: 18px;
+  height: 34px;
+  position: absolute;
+  left: 905px;
+  top: 1501px;
+  transform: translate(-16.63px, 0px);
+  overflow: visible;
+}
+.frame .rectangle-148 {
+  border-radius: 0px;
+  width: 18px;
+  height: 34px;
+  position: absolute;
+  left: 761px;
+  top: 1501px;
+  overflow: visible;
+}

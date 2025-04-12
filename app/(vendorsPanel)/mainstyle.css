@@ -1,0 +1,12 @@
+:root {
+  --foreground: #171717;
+}
+:root {
+  --bg-color: #121212;
+  --border-color: #333;
+  --card-bg: #1e1e1e;
+  --hover-color: #373737;
+
+  --font-primary: "Inter", sans-serif;
+  --font-secondary: "Poppins", sans-serif;
+}

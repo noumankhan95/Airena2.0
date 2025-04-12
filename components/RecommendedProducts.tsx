@@ -199,9 +199,14 @@ export default function ProductFetcher() {
       try {
         if (user) {
           // For example, check if user has any orders in Firestore
+          const tokenResult = await user.getIdTokenResult();
+          const isPrivilegedUser =
+            tokenResult.claims.influencer ||
+            tokenResult.claims.admin ||
+            tokenResult.claims.vendor;
           const res = await getDoc(doc(db, "order", user.uid));
           let response;
-          if (res.exists()) {
+          if (res.exists() && !isPrivilegedUser) {
             // If orders exist, fetch recommendations from the external API
             response = await fetch(
               `https://airena-recommendation-1019657848975.us-central1.run.app/recommendations?userId=${user.uid}&top_n=10`
@@ -221,7 +226,9 @@ export default function ProductFetcher() {
           console.log("LOgging result", result);
           // If uid exists, assume the external API returns a plain array. Otherwise use result.products.
           const fetchedProducts: Product[] =
-            user.uid && res.exists() ? result.recommendations : result.edges;
+            user.uid && res.exists() && !isPrivilegedUser
+              ? result.recommendations
+              : result.edges;
           setProducts(fetchedProducts);
         } else {
           let response = await fetch(

@@ -9,99 +9,78 @@ import {
   TableHead,
   TableBody,
   Paper,
+  TextField,
 } from "@mui/material";
-import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { auth } from "@/firebase";
 import useVendorStore from "@/store/adminPanel/vendorStore";
+
 function AllVendorsTable() {
   const { fetchVendor, Vendors } = useVendorStore();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredVendors, setFilteredVendors] = useState(Vendors);
 
   useEffect(() => {
     fetchVendor();
   }, []);
+
+  useEffect(() => {
+    setFilteredVendors(
+      Vendors?.filter((vendor) => {
+        const query = searchQuery.toLowerCase();
+        return (
+          vendor.name?.toLowerCase().includes(query) ||
+          vendor.email?.toLowerCase().includes(query) ||
+          vendor.contactDetails?.toLowerCase().includes(query)
+        );
+      })
+    );
+  }, [searchQuery, Vendors]);
+
   const router = useRouter();
+
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Details</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {Vendors?.map((vendor: Vendor) => (
-            <TableRow key={vendor.id}>
-              <TableCell>{vendor.name}</TableCell>
-              <TableCell>{vendor.email}</TableCell>
-              <TableCell>{vendor.contactDetails}</TableCell>
-              <TableCell>
-                <Button
-                  variant="text"
-                  color="primary"
-                  onClick={() => {
-                    router.push(`/adminPanel/manage_vendors/${vendor.id}`);
-                  }}
-                >
-                  View
-                </Button>
-
-                {/* <Button
-                  variant="text"
-                  color="error"
-                  disabled
-                  onClick={async () => {
-                    const id = toast.loading("Creating Account");
-
-                    try {
-                      const token = await auth?.currentUser?.getIdToken();
-
-                      const res = await fetch("/api/deleteVendor", {
-                        body: JSON.stringify({
-                          isAdmin: true,
-                          uid: vendor.id,
-                        }),
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json",
-                          Authorization: `Bearer ${token}`, // Include token in Authorization header
-                        },
-                      });
-                      if (!res.ok) throw await res.json();
-                      const body = await res.json();
-
-                      toast.update(id, {
-                        render: "Created Admin Successfully",
-                        isLoading: false,
-                        closeButton: true,
-                        autoClose: 5000,
-                        type: "success",
-                      });
-                    } catch (e: any) {
-                      console.log("Error", e);
-                      toast.update(id, {
-                        render: e.message,
-                        isLoading: false,
-                        closeButton: true,
-                        autoClose: 5000,
-                        type: "error",
-                      });
-                    } finally {
-                      // setisloading(false);
-                    }
-                  }}
-                >
-                  Delete
-                </Button> */}
-              </TableCell>
+    <>
+      <TextField
+        label="Search by Name, Email or Contact"
+        variant="outlined"
+        fullWidth
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        style={{ marginBottom: "16px" }}
+      />
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Details</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {filteredVendors?.map((vendor: Vendor) => (
+              <TableRow key={vendor.id}>
+                <TableCell>{vendor.name}</TableCell>
+                <TableCell>{vendor.email}</TableCell>
+                <TableCell>{vendor.contactDetails}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="text"
+                    color="primary"
+                    onClick={() => {
+                      router.push(`/adminPanel/manage_vendors/${vendor.id}`);
+                    }}
+                  >
+                    View
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }
 

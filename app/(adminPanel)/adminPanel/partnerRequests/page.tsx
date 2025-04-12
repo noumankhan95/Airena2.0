@@ -40,7 +40,8 @@ export default function PartnersPage() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [filteredPartners, setfilteredPartners] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   useEffect(() => {
     fetchPartners();
   }, []);
@@ -64,7 +65,18 @@ export default function PartnersPage() {
       setLoading(false);
     }
   }
-
+  useEffect(() => {
+    setfilteredPartners(
+      partners?.filter((seller: any) => {
+        const query = searchQuery.toLowerCase();
+        return (
+          seller.businessName?.toLowerCase().includes(query) ||
+          seller.email?.toLowerCase().includes(query) ||
+          seller.storeName?.toLowerCase().includes(query)
+        );
+      })
+    );
+  }, [searchQuery, partners]);
   const handleViewDetails = (partner: Partner) => {
     setSelectedPartner(partner);
     setEmail(partner.email);
@@ -91,6 +103,14 @@ export default function PartnersPage() {
 
   return (
     <div className="p-4">
+      <TextField
+        label="Search by Name or Email"
+        variant="outlined"
+        fullWidth
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        style={{ marginBottom: "16px" }}
+      />
       <Typography variant="h5" gutterBottom>
         Partner Requests
       </Typography>
@@ -119,7 +139,7 @@ export default function PartnersPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {partners.map((partner) => (
+              {filteredPartners?.map((partner) => (
                 <TableRow key={partner.id}>
                   <TableCell>{partner.name}</TableCell>
                   <TableCell>{partner.email}</TableCell>

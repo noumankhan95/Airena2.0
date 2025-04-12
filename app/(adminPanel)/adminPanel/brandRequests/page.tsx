@@ -17,6 +17,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  TextField,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
@@ -26,6 +27,8 @@ import { db, storage } from "@/firebase"; // Import Firebase config
 const AdminSellersTable = () => {
   const [sellers, setSellers] = useState([]);
   const [open, setOpen] = useState(false);
+  const [filteredSellers, setFilteredSellers] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedSeller, setSelectedSeller] = useState<any>(null);
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [sellerToDelete, setSellerToDelete] = useState<any>(null);
@@ -43,6 +46,7 @@ const AdminSellersTable = () => {
         }));
         //@ts-ignore
         setSellers(sellersList);
+        setFilteredSellers(sellersList);
       } catch (error) {
         console.error("Error fetching sellers:", error);
       }
@@ -50,7 +54,18 @@ const AdminSellersTable = () => {
 
     fetchSellers();
   }, []);
-
+  useEffect(() => {
+    setFilteredSellers(
+      sellers?.filter((seller: any) => {
+        const query = searchQuery.toLowerCase();
+        return (
+          seller.businessName?.toLowerCase().includes(query) ||
+          seller.email?.toLowerCase().includes(query) ||
+          seller.storeName?.toLowerCase().includes(query)
+        );
+      })
+    );
+  }, [searchQuery, sellers]);
   // Open modal with seller details
 
   //@ts-ignore
@@ -114,6 +129,14 @@ const AdminSellersTable = () => {
 
   return (
     <div className="p-4">
+      <TextField
+        label="Search by Name or Email"
+        variant="outlined"
+        fullWidth
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        style={{ marginBottom: "16px" }}
+      />
       <TableContainer component={Paper} sx={{ boxShadow: 3 }}>
         <Table>
           <TableHead>
@@ -125,7 +148,7 @@ const AdminSellersTable = () => {
                 <b>Store Name</b>
               </TableCell>
               <TableCell>
-                <b>GTIN</b>
+                <b>GSTIN</b>
               </TableCell>
               <TableCell align="right">
                 <b>Actions</b>
@@ -133,7 +156,7 @@ const AdminSellersTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {sellers?.map((seller: any) => (
+            {filteredSellers?.map((seller: any) => (
               <TableRow key={seller.id}>
                 <TableCell>{seller.businessName}</TableCell>
                 <TableCell>{seller.storeName}</TableCell>

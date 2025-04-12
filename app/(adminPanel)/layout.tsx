@@ -179,12 +179,12 @@ export default function DealerAdminPanel({
         <ListItem
           component={Link}
           sx={{ width: "90%" }}
-          href="/adminPanel/manage_vendors"
+          href="/adminPanel/manageBrands"
         >
           <ListItemIcon>
             <StoreIcon />
           </ListItemIcon>
-          <ListItemText primary="Manage Vendors" />
+          <ListItemText primary="Manage Brands" />
         </ListItem>
 
         <ListItem

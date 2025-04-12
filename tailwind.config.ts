@@ -16,6 +16,12 @@ export default {
           light: "#f56300", // Optional: lighter shade
           dark: "#1E40AF", // Optional: darker shade
         },
+        mint: {
+          DEFAULT: "#46C190",
+          dark: "#3da883",
+          darker: "#348f76",
+          light: "#e6f7f3",
+        },
       },
     },
   },

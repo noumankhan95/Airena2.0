@@ -31,6 +31,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { History } from "@mui/icons-material";
+import "../mainstyle.css";
 export default function DealerAdminPanel({
   children,
 }: Readonly<{

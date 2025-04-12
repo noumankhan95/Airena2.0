@@ -37,7 +37,7 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 const drawerWidth = 240;
-
+import "./mainstyle.css";
 export default function influencerPanel({
   children,
 }: Readonly<{

@@ -10,3 +10,13 @@
   --font-primary: "Inter", sans-serif;
   --font-secondary: "Poppins", sans-serif;
 }
+
+/* globals.css */
+
+body {
+  @apply bg-gradient-to-br from-[#0b0f0e] via-[#070a09] to-[#020404] min-h-screen w-full;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}

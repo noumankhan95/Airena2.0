@@ -35,6 +35,8 @@ import { doc, getDoc } from "firebase/firestore";
 import "./mainstyle.css";
 import useVendorstore from "@/store/vendorPanel/VendorsInfo";
 import Image from "next/image";
+import "./mainstyle.css";
+
 const drawerWidth = 240;
 
 export default function DealerAdminPanel({

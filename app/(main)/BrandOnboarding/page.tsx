@@ -106,7 +106,7 @@ export default function SellerRegistration() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-black to-green-900 p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center  p-6">
       <Typography variant="h4" className="!text-white font-bold mb-6">
         <span className="text-green-400">Seller Registration</span><span className="text-white"> & Verification</span>
       </Typography>

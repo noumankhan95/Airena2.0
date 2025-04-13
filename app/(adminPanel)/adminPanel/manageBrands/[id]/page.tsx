@@ -75,7 +75,7 @@ const VendorDetails = () => {
         <Button
           variant="contained"
           color="secondary"
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/adminPanel")}
         >
           Back to Dashboard
         </Button>

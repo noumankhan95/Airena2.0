@@ -42,7 +42,7 @@ export default function DealerAdminPanel({
   children: React.ReactNode;
 }>) {
   const [loading, setLoading] = useState<boolean>(true);
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean | undefined>(undefined);
   const [mobileOpen, setMobileOpen] = useState(false); // State for mobile drawer
   const router = useRouter();
   const { setinfo } = useAdminOwnerStore();
@@ -59,30 +59,23 @@ export default function DealerAdminPanel({
           setinfo({ email: user.email!, name: "", uid: user.uid });
         } else {
           setIsAdmin(false);
-          router.replace("/adminPanel/Authenticate");
+          router.replace("/Authenticate/AdminPanel");
           toast.error("Unauthorized");
         }
       } catch (e) {
         setIsAdmin(false);
         toast.error("Unauthorized Email");
-        router.replace("/adminPanel/Authenticate");
+        router.replace("/Authenticate/AdminPanel");
       } finally {
         setLoading(false);
         setAuthChecked(true); // Mark the auth check as completed
       }
     });
   }, []);
-  if (!authChecked) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <LoaderIcon color="blue" className="!h-40 !w-40 !border-blue-500" />
-      </div>
-    );
-  }
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
   const drawerContent = (
     <>
       <Toolbar>
@@ -227,83 +220,83 @@ export default function DealerAdminPanel({
       </List>
     </>
   );
-  console.log("Mobikle Open ", mobileOpen);
-  return loading ? (
+
+  return !authChecked || loading || isAdmin === undefined ? (
     <div className="flex items-center justify-center h-screen">
       <LoaderIcon color="blue" className="!h-40 !w-40 !border-blue-500" />
     </div>
-  ) : isAdmin ? (
-    <Box sx={{ display: "flex", minHeight: "100vh" }}>
-      <AppBar position="fixed" sx={{ display: { md: "none" } }}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, background: "#203e32" }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Super Admin Panel
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
-      <Drawer
-        variant="permanent"
-        sx={{
-          display: { xs: "none", md: "block" },
-
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-            color: "white",
-            background:
-              "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
-          },
-        }}
-        className="hide-scrollbar"
-      >
-        {drawerContent}
-      </Drawer>
-
-      <Drawer
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{ keepMounted: true }} // Improves performance on mobile
-        sx={{
-          display: { xs: "block", md: "none" },
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-            color: "white",
-            background:
-              "linear-gradient(130deg, #004d39 2%, #002d1f 27%, #000000 50%)",
-          },
-        }}
-      >
-        {drawerContent}
-      </Drawer>
-
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          backgroundColor: "black",
-          mt: { xs: 8, md: 0 }, // Adjust for AppBar height on mobile
-        }}
-      >
-        {<Header />}
-        {children}
-      </Box>
-    </Box>
   ) : (
-    <Box>{children}</Box>
+    isAdmin && (
+      <Box sx={{ display: "flex", minHeight: "100vh" }}>
+        <AppBar position="fixed" sx={{ display: { md: "none" } }}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, background: "#203e32" }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap>
+              Super Admin Panel
+            </Typography>
+          </Toolbar>
+        </AppBar>
+
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: "none", md: "block" },
+
+            width: drawerWidth,
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+              color: "white",
+              background:
+                "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
+            },
+          }}
+          className="hide-scrollbar"
+        >
+          {drawerContent}
+        </Drawer>
+
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{ keepMounted: true }} // Improves performance on mobile
+          sx={{
+            display: { xs: "block", md: "none" },
+            width: drawerWidth,
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+              color: "white",
+              background:
+                "linear-gradient(130deg, #004d39 2%, #002d1f 27%, #000000 50%)",
+            },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
+
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            backgroundColor: "black",
+            mt: { xs: 8, md: 0 }, // Adjust for AppBar height on mobile
+          }}
+        >
+          {<Header />}
+          {children}
+        </Box>
+      </Box>
+    )
   );
 }

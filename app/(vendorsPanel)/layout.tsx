@@ -74,13 +74,13 @@ export default function DealerAdminPanel({
           setIsAdmin(!!tokenResult.claims.vendor);
         } else {
           setIsAdmin(false);
-          router.replace("/BrandPanel/Authenticate");
+          router.replace("/Authenticate/BrandPanel");
         }
       } catch (e) {
         console.log(e);
         setIsAdmin(false);
         toast.error("Unauthorized Email");
-        router.replace("/BrandPanel/Authenticate");
+        router.replace("/Authenticate/BrandPanel");
       } finally {
         setLoading(false);
         setAuthChecked(true); // Mark the auth check as completed
@@ -214,77 +214,77 @@ export default function DealerAdminPanel({
     <div className="flex items-center justify-center h-screen">
       <LoaderIcon color="blue" className="!h-40 !w-40 !border-blue-500" />
     </div>
-  ) : isAdmin ? (
-    <Box sx={{ display: "flex", minHeight: "100vh" }}>
-      {/* AppBar for mobile screens */}
-      <AppBar position="fixed" sx={{ display: { md: "none" } }}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Vendor Panel
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
-      {/* Permanent Drawer for larger screens */}
-      <Drawer
-        variant="permanent"
-        sx={{
-          display: { xs: "none", md: "block" },
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-            color: "white",
-            background:
-              "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
-          },
-        }}
-      >
-        {drawerContent}
-      </Drawer>
-
-      {/* Temporary Drawer for mobile screens */}
-      <Drawer
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{ keepMounted: true }}
-        sx={{
-          display: { xs: "block", md: "none" },
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-            color: "white",
-            background:
-              "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
-          },
-        }}
-      >
-        {drawerContent}
-      </Drawer>
-
-      {/* Main content */}
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          mt: { xs: 8, md: 0 },
-        }}
-      >
-        <Header />
-        {children}
-      </Box>
-    </Box>
   ) : (
-    <Box sx={{ minHeight: "100vh" }}>{children}</Box>
+    isAdmin && (
+      <Box sx={{ display: "flex", minHeight: "100vh" }}>
+        {/* AppBar for mobile screens */}
+        <AppBar position="fixed" sx={{ display: { md: "none" } }}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap>
+              Vendor Panel
+            </Typography>
+          </Toolbar>
+        </AppBar>
+
+        {/* Permanent Drawer for larger screens */}
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: "none", md: "block" },
+            width: drawerWidth,
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+              color: "white",
+              background:
+                "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
+            },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
+
+        {/* Temporary Drawer for mobile screens */}
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{ keepMounted: true }}
+          sx={{
+            display: { xs: "block", md: "none" },
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+              color: "white",
+              background:
+                "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
+            },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
+
+        {/* Main content */}
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            mt: { xs: 8, md: 0 },
+          }}
+        >
+          <Header />
+          {children}
+        </Box>
+      </Box>
+    )
   );
 }

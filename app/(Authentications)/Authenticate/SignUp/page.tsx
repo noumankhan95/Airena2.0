@@ -11,47 +11,58 @@ import {
   IconButton,
 } from "@mui/material";
 import {
-  Email,
-  Lock,
-  Visibility,
-  VisibilityOff,
-  Google,
-} from "@mui/icons-material";
-import {
-  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
 import { auth, db } from "@/firebase";
-import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import {
+  Email,
+  Visibility,
+  VisibilityOff,
+  Lock,
+  Google,
+} from "@mui/icons-material";
 import Image from "next/image";
 
-const SignIn = () => {
+const SignUp = () => {
+  const [confirmPw, setConfirmPw] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState(""); // You were using "name" in Firestore but it was missing in state
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const id = toast.loading("Logging In...");
+    if (confirmPw !== password) {
+      return toast.error("Passwords do not match!");
+    }
+
+    const id = toast.loading("Creating Account...");
     setIsLoading(true);
 
     try {
-      const userCredential = await signInWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      await getDoc(doc(db, "users", userCredential.user.uid));
+      await setDoc(doc(db, "users", userCredential.user.uid), {
+        name,
+        email,
+        createdAt: serverTimestamp(),
+      });
 
       toast.update(id, {
-        render: "Logged In Successfully!",
+        render: "Account Created Successfully!",
         type: "success",
         isLoading: false,
         autoClose: 3000,
@@ -60,7 +71,7 @@ const SignIn = () => {
 
       router.replace("/user/myAccount");
     } catch (error: any) {
-      console.error("Login Error:", error);
+      console.error("Sign Up Error:", error);
       toast.update(id, {
         render: error.message,
         type: "error",
@@ -73,19 +84,18 @@ const SignIn = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    const id = toast.loading("Signing in with Google...");
-    setIsLoading(true);
+  const handleGoogleSignUp = async () => {
+    const id = toast.loading("Signing up with Google...");
     const provider = new GoogleAuthProvider();
+    setIsLoading(true);
 
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      // Check if user already exists in Firestore
       const userDoc = await getDoc(doc(db, "users", user.uid));
       if (!userDoc.exists()) {
-        // Create new user in Firestore if not exists
+        // Only create user document if not already exists
         await setDoc(doc(db, "users", user.uid), {
           name: user.displayName,
           email: user.email,
@@ -94,7 +104,7 @@ const SignIn = () => {
       }
 
       toast.update(id, {
-        render: "Signed in with Google!",
+        render: "Signed up successfully!",
         type: "success",
         isLoading: false,
         autoClose: 3000,
@@ -103,7 +113,7 @@ const SignIn = () => {
 
       router.replace("/user/myAccount");
     } catch (error: any) {
-      console.error("Google Sign In Error:", error);
+      console.error("Google Sign Up Error:", error);
       toast.update(id, {
         render: error.message,
         type: "error",
@@ -116,29 +126,47 @@ const SignIn = () => {
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
-
   return (
-    <Box className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0A1A0E] to-[#07150A]">
+    <Box className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#0A1A0E] to-[#07150A] p-4">
+      {/* Navigation */}
+      {/* <Box className="absolute top-4 right-8 flex space-x-6">
+        <Link href="/" className="text-gray-400 hover:text-white">
+          Home
+        </Link>
+        <Link href="/user/SignIn" className="text-gray-400 hover:text-white">
+          Sign In
+        </Link>
+      </Box> */}
+
       <Container
         maxWidth="xs"
         className="bg-[#0D1F12] p-8 rounded-2xl shadow-lg flex flex-col items-center"
       >
-        <Link href="/" className="flex items-center !mb-4">
-          <Image src="/logo.png" alt="Airena Logo" width={120} height={40} />
+        <Link href="/" className="flex items-center !mb-6">
+          <Image src="/logo.png" alt="Arena Logo" width={120} height={40} />
         </Link>
 
-        <Typography variant="h5" fontWeight="bold" className="text-white !mb-6">
-          Sign In
+        <Typography variant="h5" className="text-white !mb-4">
+          Create an Account
         </Typography>
 
         <form onSubmit={handleSubmit} className="w-full !space-y-4">
           <TextField
             fullWidth
+            label="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Email />
+                </InputAdornment>
+              ),
+            }}
+          />
+          <TextField
+            fullWidth
             label="Email"
-            variant="outlined"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             InputProps={{
@@ -148,14 +176,11 @@ const SignIn = () => {
                 </InputAdornment>
               ),
             }}
-            sx={{ input: { color: "white" }, label: { color: "white" } }}
           />
-
           <TextField
             fullWidth
             label="Password"
             type={showPassword ? "text" : "password"}
-            variant="outlined"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             InputProps={{
@@ -166,42 +191,61 @@ const SignIn = () => {
               ),
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={togglePasswordVisibility} edge="end">
+                  <IconButton onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               ),
             }}
-            sx={{ input: { color: "white" }, label: { color: "white" } }}
+          />
+          <TextField
+            fullWidth
+            label="Confirm Password"
+            type={showConfirmPassword ? "text" : "password"}
+            value={confirmPw}
+            onChange={(e) => setConfirmPw(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Lock />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
           <Box className="flex items-center justify-center !space-x-2">
             <Button
-              fullWidth
               type="submit"
+              fullWidth
               variant="contained"
               color="primary"
               disabled={isLoading}
               sx={{
                 color: "black",
-                p: 1.7,
+                p: 1.68,
                 fontSize: "12px",
               }}
             >
-              Sign In
+              {isLoading ? "Creating..." : "Sign Up"}
             </Button>
 
-            {/* <Typography align="center" color="white" className="my-2">
-            OR
-          </Typography> */}
-
+            {/* Google Sign Up Button */}
             <Button
+              onClick={handleGoogleSignUp}
               fullWidth
               variant="outlined"
+              disabled={isLoading}
               startIcon={
                 <Google fontSize={"small"} className="!text-sm !m-0" />
               }
-              onClick={handleGoogleSignIn}
-              disabled={isLoading}
               sx={{
                 color: "black",
                 fontSize: "12px",
@@ -217,7 +261,7 @@ const SignIn = () => {
           align="center"
           sx={{ mt: 2 }}
         >
-          By signing in, you agree to our{" "}
+          By signing up, you agree to our{" "}
           <Link href="/TermsAndConditions" passHref legacyBehavior>
             <Typography
               component="a"
@@ -247,13 +291,14 @@ const SignIn = () => {
           </Link>
           .
         </Typography>
-        <Typography variant="body2" color="white" className="!mt-8">
-          Don&apos;t have an account?{" "}
+
+        <Typography variant="body2" className="text-gray-400 !mt-4">
+          Already have an account?
           <Link
-            href="/user/SignUp"
-            className="text-green-400 hover:underline !my-8"
+            href="/Authenticate/SignIn"
+            className="text-green-400 hover:underline ml-1"
           >
-            Sign Up
+            Sign In
           </Link>
         </Typography>
       </Container>
@@ -261,4 +306,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

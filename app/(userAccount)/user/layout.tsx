@@ -74,7 +74,7 @@ export default function DealerAdminPanel({
       } else {
         setIsLoggedIn(false);
         // toast.error("Unauthorized Email");
-        router.replace("/user/SignIn"); // Redirect to SignIn if not logged in
+        router.replace("/Authenticate/SignIn"); // Redirect to SignIn if not logged in
       }
       setAuthChecked(true); // Mark the auth check as completed
       setLoading(false);
@@ -166,74 +166,74 @@ export default function DealerAdminPanel({
     );
   }
 
-  return isLoggedIn ? (
-    <Box sx={{ display: "flex", minHeight: "100vh" }}>
-      {/* AppBar for mobile screens */}
-      <AppBar position="fixed" sx={{ display: { md: "none" } }}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            My Account
-          </Typography>
-        </Toolbar>
-      </AppBar>
+  return (
+    isLoggedIn && (
+      <Box sx={{ display: "flex", minHeight: "100vh" }}>
+        {/* AppBar for mobile screens */}
+        <AppBar position="fixed" sx={{ display: { md: "none" } }}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap>
+              My Account
+            </Typography>
+          </Toolbar>
+        </AppBar>
 
-      {/* Permanent Drawer for larger screens */}
-      <Drawer
-        variant="permanent"
-        sx={{
-          display: { xs: "none", md: "block" },
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
+        {/* Permanent Drawer for larger screens */}
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: "none", md: "block" },
             width: drawerWidth,
-            boxSizing: "border-box",
-            color: "white",
-            background:
-              "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
-          },
-        }}
-      >
-        {drawerContent}
-      </Drawer>
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+              color: "white",
+              background:
+                "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
+            },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
 
-      {/* Temporary Drawer for mobile screens */}
-      <Drawer
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{ keepMounted: true }}
-        sx={{
-          display: { xs: "block", md: "none" },
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-            color: "white",
-            background:
-              "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
-          },
-        }}
-      >
-        {drawerContent}
-      </Drawer>
+        {/* Temporary Drawer for mobile screens */}
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{ keepMounted: true }}
+          sx={{
+            display: { xs: "block", md: "none" },
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+              color: "white",
+              background:
+                "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
+            },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
 
-      {/* Main content */}
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, backgroundColor: "black", mt: { xs: 8, md: 0 } }}
-      >
-        <Header />
-        {children}
+        {/* Main content */}
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, backgroundColor: "black", mt: { xs: 8, md: 0 } }}
+        >
+          <Header />
+          {children}
+        </Box>
       </Box>
-    </Box>
-  ) : (
-    <Box sx={{ minHeight: "100vh", backgroundColor: "black" }}>{children}</Box>
+    )
   );
 }

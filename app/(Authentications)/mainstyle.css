@@ -1,0 +1,56 @@
+:root {
+  --foreground: #171717;
+}
+/* Global Styles */
+:root {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --secondary-text-color: #b0b0b0;
+  --primary-color: #4f46e5; /* Indigo */
+  --accent-color: #9333ea; /* Purple */
+  --border-color: #333;
+  --card-bg: #1e1e1e;
+  --hover-color: #373737;
+
+  /* Fonts */
+  --font-primary: "Inter", sans-serif;
+  --font-secondary: "Poppins", sans-serif;
+}
+
+/* globals.css */
+
+/* globals.css */
+
+/* globals.css */
+
+/* Reset some defaults */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Only background rotates */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(17, 46, 35, 0.9) 0%,
+    /* Darker green with opacity */ rgba(0, 0, 0, 1) 50%,
+    /* Full black at center */ rgba(17, 46, 35, 0.9) 100%
+      /* Darker green with opacity */
+  );
+  transform: scale(2.1) rotate(35deg); /* Scaling and rotating the gradient */
+  transform-origin: center center; /* Ensures rotation happens around the center */
+  z-index: -1; /* Keeps it behind the content */
+  pointer-events: none; /* Makes sure it doesn't block interactions */
+}

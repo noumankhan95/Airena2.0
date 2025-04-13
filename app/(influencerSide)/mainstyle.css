@@ -15,9 +15,35 @@
   --font-secondary: "Poppins", sans-serif;
 } */
 body {
-  @apply bg-gradient-to-br from-[#0b0f0e] via-[#070a09] to-[#020404] min-h-screen w-full;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: white;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Only background rotates */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+
+  background: linear-gradient(
+    to right,
+    black 0%,
+    #020504 35%,
+    #0e271e 50%,
+    #020504 65%,
+    black 100%
+  );
+
+  transform: scale(2.1) rotate(35deg);
+  transform-origin: center;
+  z-index: -1;
+  pointer-events: none; /* Background won't block clicks */
 }

@@ -42,7 +42,7 @@ export default function StreamStatusUpdater({ streamId }) {
             if (result.success) {
                 toast.success('Stream ended successfully');
                 // Navigate to analytics page with parameters
-                router.push(`/influencerPanel/streamanalytics/?influencerId=${influencerId}&streamId=${streamId}`);
+                router.push(`/CreatorPanel/streamanalytics/?influencerId=${influencerId}&streamId=${streamId}`);
             } else {
                 toast.error(result.error || 'Failed to end stream');
             }

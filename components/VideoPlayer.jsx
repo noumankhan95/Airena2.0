@@ -28,28 +28,28 @@ export default function VideoPlayer({ src }) {
                         {/* Left Side Controls */}
                         <div className="flex items-center gap-6 flex-1">
                             {/* Play/Pause */}
-                            <Player.PlayPauseTrigger className="w-14 h-14 flex items-center justify-center text-[#46C190]">
+                            <Player.PlayPauseTrigger className="w-14 h-14 flex items-center justify-center text-[#46C190] bg-transparent">
                                 <Player.PlayingIndicator asChild matcher={false}>
-                                    <PlayIcon style={{ width: 42, height: 42, color: '#46C190', backgroundColor: 'none !important' }} />
+                                    <PlayIcon />
                                 </Player.PlayingIndicator>
                                 <Player.PlayingIndicator asChild>
-                                    <PauseIcon style={{ width: 42, height: 42, color: '#46C190', backgroundColor: 'none !important' }} />
+                                    <PauseIcon />
                                 </Player.PlayingIndicator>
                             </Player.PlayPauseTrigger>
 
                             {/* Live Indicator */}
-                            <Player.LiveIndicator className="flex items-center gap-2 text-[#46C190]">
+                            <Player.LiveIndicator className="w-14 h-14 flex items-center justify-center text-[#46C190] bg-transparent">
                                 <div className="bg-[#ef4444] w-4 h-4 rounded-full"></div>
                                 <span className="text-sm select-none">LIVE</span>
                             </Player.LiveIndicator>
 
                             {/* Mute/Unmute */}
-                            <Player.MuteTrigger className="w-12 h-12 flex items-center justify-center text-[#46C190] bg-none">
+                            <Player.MuteTrigger className="w-14 h-14 flex items-center justify-center text-[#46C190] bg-transparent">
                                 <Player.VolumeIndicator asChild matcher={false}>
-                                    <MuteIcon style={{ width: 36, height: 36, color: '#46C190', backgroundColor: 'none !important' }} />
+                                    <MuteIcon />
                                 </Player.VolumeIndicator>
                                 <Player.VolumeIndicator asChild matcher={true}>
-                                    <UnmuteIcon style={{ width: 36, height: 36, color: '#46C190', backgroundColor: 'none !important' }} />
+                                    <UnmuteIcon />
                                 </Player.VolumeIndicator>
                             </Player.MuteTrigger>
 
@@ -65,12 +65,12 @@ export default function VideoPlayer({ src }) {
                         {/* Right Side Controls */}
                         <div className="flex items-center gap-6">
                             {/* Fullscreen Icon */}
-                            <Player.FullscreenTrigger className="w-12 h-12 flex items-center justify-center text-[#46C190] !bg-none">
+                            <Player.FullscreenTrigger className="w-14 h-14 flex items-center justify-center text-[#46C190] bg-transparent">
                                 <Player.FullscreenIndicator asChild matcher={false}>
-                                    <EnterFullscreenIcon style={{ width: 36, height: 36, color: '#46C190', backgroundColor: 'none !important' }} />
+                                    <EnterFullscreenIcon />
                                 </Player.FullscreenIndicator>
                                 <Player.FullscreenIndicator asChild matcher={true}>
-                                    <EnterFullscreenIcon style={{ width: 36, height: 36, color: '#46C190', backgroundColor: 'none !important' }} />
+                                    <EnterFullscreenIcon />
                                 </Player.FullscreenIndicator>
                             </Player.FullscreenTrigger>
 

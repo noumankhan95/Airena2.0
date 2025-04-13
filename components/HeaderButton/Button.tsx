@@ -31,7 +31,7 @@ function HeaderButton() {
 
   return (
     <Link
-      href={uid ? "/user/myAccount" : "/user/SignIn"}
+      href={uid ? "/user/myAccount" : "/Authenticate/SignIn"}
       className="border border-green-500/70 text-white px-6 py-2 rounded-md hover:bg-green-500/10 transition duration-300"
     >
       {uid ? "My Account" : "Login"}

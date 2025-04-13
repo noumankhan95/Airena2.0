@@ -17,7 +17,9 @@ export default function NotFoundPage() {
       </motion.div>
 
       {/* Heading */}
-      <h1 className="text-6xl font-bold text-indigo-500">404</h1>
+      <h1 className="text-6xl font-bold " color="#46C190">
+        404
+      </h1>
       <h2 className="mt-4 text-2xl font-semibold">Oops! Page Not Found</h2>
       <p className="mt-2 text-gray-400 text-center max-w-md">
         The page you're looking for doesn't exist. It might have been moved or
@@ -29,7 +31,7 @@ export default function NotFoundPage() {
         href="/"
         className="mt-6 flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-2 text-white transition hover:bg-indigo-700"
       >
-        🔙 Go Home
+        Go Home
       </Link>
     </div>
   );

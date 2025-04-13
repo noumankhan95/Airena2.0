@@ -34,7 +34,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ArticleIcon from "@mui/icons-material/Article";
 import "./mainstyle.css";
 import { Email } from "@mui/icons-material";
-const drawerWidth = 300;
+const drawerWidth = 270;
 
 export default function DealerAdminPanel({
   children,
@@ -257,6 +257,12 @@ export default function DealerAdminPanel({
               color: "white",
               background:
                 "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
+              height: "100vh",
+              overflowY: "auto",
+              scrollbarWidth: "none", // For Firefox
+              "&::-webkit-scrollbar": {
+                display: "none", // For Chrome, Safari
+              },
             },
           }}
           className="hide-scrollbar"
@@ -279,6 +285,12 @@ export default function DealerAdminPanel({
               color: "white",
               background:
                 "linear-gradient(130deg, #004d39 2%, #002d1f 27%, #000000 50%)",
+              height: "100vh",
+              overflowY: "auto",
+              scrollbarWidth: "none", // For Firefox
+              "&::-webkit-scrollbar": {
+                display: "none", // For Chrome, Safari
+              },
             },
           }}
         >

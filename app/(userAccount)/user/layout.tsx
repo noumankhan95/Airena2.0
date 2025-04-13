@@ -199,6 +199,12 @@ export default function DealerAdminPanel({
               color: "white",
               background:
                 "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
+              height: "100vh",
+              overflowY: "auto",
+              scrollbarWidth: "none", // For Firefox
+              "&::-webkit-scrollbar": {
+                display: "none", // For Chrome, Safari
+              },
             },
           }}
         >
@@ -219,6 +225,12 @@ export default function DealerAdminPanel({
               color: "white",
               background:
                 "linear-gradient(130deg, #004d39 2%, #002d1f 7%, #000000 50%)",
+              height: "100vh",
+              overflowY: "auto",
+              scrollbarWidth: "none", // For Firefox
+              "&::-webkit-scrollbar": {
+                display: "none", // For Chrome, Safari
+              },
             },
           }}
         >

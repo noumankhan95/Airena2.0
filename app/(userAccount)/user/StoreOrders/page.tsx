@@ -95,7 +95,7 @@ const OrdersPage = () => {
                   <TableCell>
                     <Typography
                       variant="body1"
-                      className="bg-green-500 !text-white text-center rounded-lg"
+                      className="bg-green-400 !text-white text-center rounded-lg w-20"
                     >
                       {order.fulfillment_status || "Pending"}
                     </Typography>{" "}

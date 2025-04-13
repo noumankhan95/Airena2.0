@@ -40,20 +40,16 @@ body::before {
   position: fixed;
   top: 0;
   left: 0;
-  width: 200%;
-  height: 200%;
-
+  width: 100%;
+  height: 100%;
   background: linear-gradient(
     to right,
     #112e23 0%,
-    /* Bright green at the left edge */ #0a1914 20%,
-    /* Darker green toward center */ #000000 50%,
-    /* Pure black at exact center */ #0a1914 80%,
-    /* Darker green out toward right */ #112e23 100%
-      /* Bright green at the right edge */
+    /* Green at the left */ #000000 50%,
+    /* Black at the center */ #112e23 100% /* Green at the right */
   );
-  transform: scale(2.1) rotate(35deg);
-  transform-origin: center;
-  z-index: -1;
-  pointer-events: none; /* Background won't block clicks */
+  transform: scale(2.1) rotate(35deg); /* Scaling and rotating the gradient */
+  transform-origin: center center; /* Ensures rotation happens around the center */
+  z-index: -1; /* Keeps it behind the content */
+  pointer-events: none; /* Makes sure it doesn't block interactions */
 }

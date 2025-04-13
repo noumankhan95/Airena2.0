@@ -27,7 +27,7 @@ export default function VendorAnalytics() {
   useEffect(() => {
     const fetchAnalytics = async () => {
       try {
-        const vendorDoc = await getDoc(doc(db, "vendorAnalytics", uid));
+        const vendorDoc = await getDoc(doc(db, "vendorAnalytics", name));
         if (vendorDoc.exists()) {
           setData(vendorDoc.data());
         } else {

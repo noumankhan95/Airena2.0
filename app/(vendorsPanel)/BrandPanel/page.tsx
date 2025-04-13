@@ -120,14 +120,14 @@ export default function VendorAnalytics() {
               Estimated Earnings
             </Typography>
 
-            <Tooltip
+            {/* <Tooltip
               title="This revenue is excluding influencer commission."
               arrow
-            >
-              <Typography variant="body1" sx={{ cursor: "help" }}>
-                {data.totalRevenue + " INR" || "N/A"}
-              </Typography>
-            </Tooltip>
+            > */}
+            <Typography variant="body1" >
+              {data.totalRevenue + " INR" || "N/A"}
+            </Typography>
+            {/* </Tooltip> */}
           </CardContent>
         </Card>
       </Box>

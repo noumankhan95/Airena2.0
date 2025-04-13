@@ -3,39 +3,18 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const vendor = searchParams.get("vendor"); // Get vendor from query params
-    console.log(vendor);
+    const vendor = searchParams.get("vendor");
+    const limit = 10; // Number of orders per page
 
-    const productsResponse = await fetch(
-      `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/admin/api/2023-10/products.json?vendor=Nouman`,
-      {
-        method: "GET",
-        headers: {
-          "X-Shopify-Access-Token": process.env.SHOPIFY_ADMIN_API_ACCESS_TOKEN!,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (!productsResponse.ok) {
-      throw new Error("Failed to fetch products");
-    }
-
-    const productsData = await productsResponse.json();
-    const products = productsData.products;
-    const productIds = products?.map((p: any) => p.id);
-
-    if (productIds.length === 0) {
+    if (!vendor) {
       return NextResponse.json(
-        {
-          message: "No products found for this vendor",
-          products: false,
-        },
-        { status: 504 }
+        { error: "Vendor is required" },
+        { status: 400 }
       );
     }
+
     const ordersResponse = await fetch(
-      `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/admin/api/2023-10/orders.json`,
+      `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/admin/api/2023-10/orders.json?status=any&limit=${limit}`,
       {
         method: "GET",
         headers: {
@@ -46,59 +25,69 @@ export async function GET(req: NextRequest) {
     );
 
     if (!ordersResponse.ok) {
-      throw new Error("Failed to fetch orders");
+      const errorData = await ordersResponse.json();
+      console.error("Shopify API error:", errorData); // Log detailed error from Shopify
+      throw new Error(
+        `Failed to fetch orders: ${errorData?.errors || "Unknown error"}`
+      );
     }
 
     const ordersData = await ordersResponse.json();
     const orders = ordersData?.orders;
 
-    // 2️⃣ Filter Orders by Vendor
-    let totalRevenue = 0;
-    let totalProductsSold = 0;
-    const productSales = {};
-
+    // 📦 Extract relevant data
+    const filteredOrders: any[] = [];
     orders?.forEach((order: any) => {
-      order.line_items.forEach((item: any) => {
+      const { id, created_at, customer, line_items } = order;
+
+      line_items.forEach((item: any) => {
         if (item.vendor === vendor) {
-          totalRevenue += item.price * item.quantity;
-          totalProductsSold += item.quantity;
-          //@ts-ignore
-          if (!productSales[item.title]) {
-            //@ts-ignore
-
-            productSales[item.title] = 0;
-          }
-          //@ts-ignore
-
-          productSales[item.title] += item.quantity;
+          filteredOrders.push({
+            orderId: id,
+            createdAt: created_at,
+            customerName:
+              customer?.first_name + " " + customer?.last_name || "N/A",
+            customerEmail: customer?.email || "N/A",
+            productTitle: item.title,
+            quantity: item.quantity,
+            price: parseFloat(item.price),
+            total: parseFloat(item.price) * item.quantity,
+          });
         }
       });
     });
 
-    // 3️⃣ Sort Best-Selling Products
-    const bestSellingProducts = Object.entries(productSales)
-      .map(([name, sales]) => ({ name, sales }))
-      //@ts-ignore
-
-      .sort((a, b) => b.sales - a.sales)
-      .slice(0, 5); // Top 5 products
-
-    // 4️⃣ Return Analytics Data
+    // Get pagination links from the "Link" header
+    const linkHeader = ordersResponse.headers.get("Link");
+    const nextPageUrl = linkHeader?.includes('rel="next"')
+      ? linkHeader
+          .split(",")
+          .find((link) => link.includes('rel="next"'))
+          ?.split(";")[0]
+          .replace(/<|>/g, "")
+      : null;
+    const prevPageUrl = linkHeader?.includes('rel="previous"')
+      ? linkHeader
+          .split(",")
+          .find((link) => link.includes('rel="previous"'))
+          ?.split(";")[0]
+          .replace(/<|>/g, "")
+      : null;
 
     return NextResponse.json(
       {
         vendor,
-        totalRevenue,
-        totalProductsSold,
-        bestSellingProducts,
-        products: true,
+        orders: filteredOrders,
+        nextPageUrl,
+        prevPageUrl,
       },
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching orders:", error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      //@ts-ignore
+      { error: `Internal Server Error: ${error.message}` },
       { status: 500 }
     );
   }

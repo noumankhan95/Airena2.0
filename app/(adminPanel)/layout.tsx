@@ -34,7 +34,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ArticleIcon from "@mui/icons-material/Article";
 import "./mainstyle.css";
 import { Email } from "@mui/icons-material";
-const drawerWidth = 270;
+const drawerWidth = 300;
 
 export default function DealerAdminPanel({
   children,

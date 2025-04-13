@@ -36,6 +36,7 @@ import "./mainstyle.css";
 import useVendorstore from "@/store/vendorPanel/VendorsInfo";
 import Image from "next/image";
 import "./mainstyle.css";
+import { Shop, ShopTwo } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -160,6 +161,26 @@ export default function DealerAdminPanel({
             <InventoryIcon />
           </ListItemIcon>
           <ListItemText primary="Manage Products" />
+        </ListItem>
+        <ListItem
+          component={Link}
+          href="/BrandPanel/InStreamOrders"
+          sx={{ width: "90%" }}
+        >
+          <ListItemIcon>
+            <ShopTwo />
+          </ListItemIcon>
+          <ListItemText primary="Instream Orders" />
+        </ListItem>
+        <ListItem
+          component={Link}
+          href="/BrandPanel/StoreOrders"
+          sx={{ width: "90%" }}
+        >
+          <ListItemIcon>
+            <Shop />
+          </ListItemIcon>
+          <ListItemText primary="Store Orders" />
         </ListItem>
         {/* <ListItem
           component={Link}

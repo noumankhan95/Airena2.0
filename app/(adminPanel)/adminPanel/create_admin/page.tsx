@@ -30,14 +30,17 @@ const CreateAdmin = () => {
     try {
       const token = await auth?.currentUser?.getIdToken();
 
-      const res = await fetch("/api/createAdmin", {
-        body: JSON.stringify({ email, isAdmin: true, name, password }),
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Include token in Authorization header
-        },
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/createAdmin`,
+        {
+          body: JSON.stringify({ email, isAdmin: true, name, password }),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Include token in Authorization header
+          },
+        }
+      );
       if (!res.ok) throw await res.json();
       const body = await res.json();
 

@@ -65,21 +65,24 @@ const CreateDealersAccount = () => {
       if (name && email && password && contactDetails) {
         const token = await auth?.currentUser?.getIdToken();
 
-        const res = await fetch("/api/createInfluencer", {
-          body: JSON.stringify({
-            email,
-            password,
-            contactDetails,
-            name,
-            channel,
-            isAdmin: true,
-          }),
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Include token in Authorization header
-          },
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/createInfluencer`,
+          {
+            body: JSON.stringify({
+              email,
+              password,
+              contactDetails,
+              name,
+              channel,
+              isAdmin: true,
+            }),
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Include token in Authorization header
+            },
+          }
+        );
         if (!res.ok) throw await res.json();
         const body = await res.json();
         toast.update(id, {

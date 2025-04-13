@@ -69,7 +69,7 @@ function AllVendorsTable() {
                     variant="text"
                     color="primary"
                     onClick={() => {
-                      router.push(`/adminPanel/manage_vendors/${vendor.id}`);
+                      router.push(`/adminPanel/manageBrands/${vendor.id}`);
                     }}
                   >
                     View

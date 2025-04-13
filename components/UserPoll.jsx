@@ -13,11 +13,11 @@ const UserPoll = ({ playbackId }) => {
         if (!playbackId) return;
 
         const pollRef = collection(db, 'polls');
-        const q = query(pollRef, 
+        const q = query(pollRef,
             where('playbackId', '==', playbackId),
             where('active', '==', true)
         );
-        
+
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const pollData = [];
             snapshot.forEach((doc) => {
@@ -73,7 +73,6 @@ const UserPoll = ({ playbackId }) => {
     }
 
     const totalVotes = poll.votes.reduce((sum, current) => sum + current, 0);
-
     return (
         <Paper elevation={2} sx={{ p: 3 }}>
             <Typography variant="h6" sx={{ mb: 3 }}>
@@ -82,9 +81,9 @@ const UserPoll = ({ playbackId }) => {
             <Stack spacing={2}>
                 {poll.options.map((option, index) => {
                     const percentage = calculatePercentage(poll.votes[index], totalVotes);
-                    
+
                     return (
-                        <Box 
+                        <Box
                             key={index}
                             onClick={() => !hasVoted && handleVote(index)}
                             sx={{
@@ -95,8 +94,10 @@ const UserPoll = ({ playbackId }) => {
                                 borderColor: 'divider',
                                 cursor: hasVoted ? 'default' : 'pointer',
                                 transition: 'all 0.2s',
+                                bgcolor: hasVoted ? 'background.paper' : '#46C190',
                                 '&:hover': {
-                                    bgcolor: hasVoted ? 'background.paper' : blue[50],
+                                    bgcolor: hasVoted ? '#27896C' : 'background.paper', // Same dark green on hover
+                                    color: hasVoted ? 'black' : 'black',
                                 },
                             }}
                         >
@@ -106,10 +107,10 @@ const UserPoll = ({ playbackId }) => {
                                     {poll.votes[index]} votes ({percentage}%)
                                 </Typography>
                             </Box>
-                            <LinearProgress 
-                                variant="determinate" 
+                            <LinearProgress
+                                variant="determinate"
                                 value={percentage}
-                                sx={{ 
+                                sx={{
                                     position: 'absolute',
                                     left: 0,
                                     top: 0,

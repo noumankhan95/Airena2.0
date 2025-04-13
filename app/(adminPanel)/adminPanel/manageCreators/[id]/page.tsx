@@ -22,7 +22,7 @@ const InfluencerDetail = () => {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/adminPanel")}
           sx={{ mt: 2 }}
         >
           Go Back

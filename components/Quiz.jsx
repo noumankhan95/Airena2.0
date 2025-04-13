@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { Trash, Edit3 } from 'lucide-react';
 import { db } from '@/firebase';
 import { collection, addDoc, getDocs, deleteDoc, doc, query, where, onSnapshot, updateDoc } from 'firebase/firestore';
-import { TextField, Button, Typography, Box, Paper, Checkbox, FormControlLabel, IconButton, Stack } from '@mui/material';
+import { TextField, Button, Typography, Box, Paper, Checkbox, FormControlLabel, IconButton, Stack, Tooltip } from '@mui/material';
 import { green, blue, red, purple, yellow } from '@mui/material/colors';
-
+import { toast } from 'react-toastify';
 const Quiz = ({ playbackId, streamId }) => {
     const [questions, setQuestions] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState('');
@@ -79,15 +79,15 @@ const Quiz = ({ playbackId, streamId }) => {
 
     const addQuestion = () => {
         if (currentQuestion.trim() === '') {
-            alert('Question cannot be empty');
+            toast.info('Question cannot be empty');
             return;
         }
         if (options.some(option => option.trim() === '')) {
-            alert('Options cannot be empty');
+            toast.info('Options cannot be empty');
             return;
         }
         if (correctAnswers.length === 0) {
-            alert('At least one correct option must be selected');
+            toast.info('At least one correct option must be selected');
             return;
         }
         const newQuestion = { question: currentQuestion, options, correctAnswers };
@@ -171,7 +171,7 @@ const Quiz = ({ playbackId, streamId }) => {
 
             setPreviewQuiz(quizData);
             setShowPreview(true);
-            alert('Quiz submitted successfully!');
+            toast.info('Quiz submitted successfully!');
             setQuestions([]);
             setShowQuizForm(false);
         } catch (error) {
@@ -193,7 +193,7 @@ const Quiz = ({ playbackId, streamId }) => {
             });
             setQuestions([]);
             setShowPreview(false);
-            alert('Quiz ended successfully!');
+            toast.info('Quiz ended successfully!');
         } catch (error) {
             console.error('Error ending quiz:', error);
         }
@@ -202,9 +202,9 @@ const Quiz = ({ playbackId, streamId }) => {
     return (
         <Box>
             {!showQuizForm && !showPreview && (
-                <Button 
-                    onClick={() => setShowQuizForm(true)} 
-                    variant="contained" 
+                <Button
+                    onClick={() => setShowQuizForm(true)}
+                    variant="contained"
                     color="success"
                     fullWidth
                     sx={{ mb: 2 }}
@@ -242,8 +242,8 @@ const Quiz = ({ playbackId, streamId }) => {
                                     }
                                     label="Correct"
                                 />
-                                <IconButton 
-                                    onClick={() => removeOption(index)} 
+                                <IconButton
+                                    onClick={() => removeOption(index)}
                                     color="error"
                                     size="small"
                                 >
@@ -252,26 +252,27 @@ const Quiz = ({ playbackId, streamId }) => {
                             </Box>
                         ))}
                         <Stack direction="row" spacing={2}>
-                            <Button 
-                                onClick={addOption} 
-                                variant="outlined" 
+                            <Button
+                                onClick={addOption}
+                                variant="outlined"
                                 color="success"
                             >
                                 Add Option
                             </Button>
-                            <Button 
-                                onClick={isEditing ? updateQuestion : addQuestion} 
-                                variant="contained" 
+                            <Button
+                                onClick={isEditing ? updateQuestion : addQuestion}
+                                variant="contained"
                                 color="primary"
                             >
                                 {isEditing ? 'Update Question' : 'Add Question'}
                             </Button>
-                            <Button 
-                                onClick={submitQuiz} 
-                                variant="contained" 
+                            <Button
+                                onClick={submitQuiz}
+                                variant="contained"
                                 color="secondary"
                             >
-                                {currentQuiz.id ? 'Update Quiz' : 'Submit Quiz'}
+                                {/* <Tooltip>Make Sure to Add Question Before Uploading</Tooltip> */}
+                                Upload To Database
                             </Button>
                         </Stack>
 
@@ -293,17 +294,17 @@ const Quiz = ({ playbackId, streamId }) => {
                                         </Typography>
                                     ))}
                                     <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-                                        <Button 
-                                            onClick={() => editQuestion(index)} 
-                                            variant="outlined" 
+                                        <Button
+                                            onClick={() => editQuestion(index)}
+                                            variant="outlined"
                                             color="warning"
                                             size="small"
                                         >
                                             Edit
                                         </Button>
-                                        <Button 
-                                            onClick={() => removeQuestion(index)} 
-                                            variant="outlined" 
+                                        <Button
+                                            onClick={() => removeQuestion(index)}
+                                            variant="outlined"
                                             color="error"
                                             size="small"
                                         >
@@ -336,11 +337,11 @@ const Quiz = ({ playbackId, streamId }) => {
                                                 px: 2,
                                                 py: 1,
                                                 borderRadius: 1,
-                                                bgcolor: question.correctAnswers.includes(oIndex) 
-                                                    ? green[100] 
-                                                    : 'grey.100',
-                                                color: question.correctAnswers.includes(oIndex) 
-                                                    ? green[800] 
+                                                bgcolor: question.correctAnswers.includes(oIndex)
+                                                    ? green[100]
+                                                    : red[800],
+                                                color: question.correctAnswers.includes(oIndex)
+                                                    ? green[800]
                                                     : 'text.primary',
                                             }}
                                         >

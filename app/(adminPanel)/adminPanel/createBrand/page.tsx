@@ -64,20 +64,23 @@ const CreateVendorsAccount = () => {
       if (name && email && password && contactDetails) {
         const token = await auth?.currentUser?.getIdToken();
 
-        const res = await fetch("/api/createVendor", {
-          body: JSON.stringify({
-            email,
-            password,
-            contactDetails,
-            name,
-            isAdmin: true,
-          }),
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Include token in Authorization header
-          },
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/createVendor`,
+          {
+            body: JSON.stringify({
+              email,
+              password,
+              contactDetails,
+              name,
+              isAdmin: true,
+            }),
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Include token in Authorization header
+            },
+          }
+        );
         if (!res.ok) throw await res.json();
         const body = await res.json();
         toast.update(id, {

@@ -16,11 +16,11 @@ const UserQuiz = ({ playbackId }) => {
         if (!playbackId) return;
 
         const quizRef = collection(db, 'quizzes');
-        const q = query(quizRef, 
+        const q = query(quizRef,
             where('playbackId', '==', playbackId),
             where('active', '==', true)
         );
-        
+
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const quizData = [];
             snapshot.forEach((doc) => {
@@ -52,7 +52,7 @@ const UserQuiz = ({ playbackId }) => {
 
     const handleAnswerSelect = (questionIndex, optionIndex) => {
         if (hasSubmitted) return;
-        
+
         setUserAnswers(prev => ({
             ...prev,
             [questionIndex]: optionIndex
@@ -114,7 +114,7 @@ const UserQuiz = ({ playbackId }) => {
 
     return (
         <Box sx={{ mt: 2 }}>
-            <Paper elevation={2} sx={{ p: 3, bgcolor: 'background.paper' }}>
+            <Paper elevation={2} sx={{ p: 3 }}>
                 {quiz.questions.map((question, qIndex) => (
                     <Box key={qIndex} sx={{ mb: 4 }}>
                         <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
@@ -130,14 +130,18 @@ const UserQuiz = ({ playbackId }) => {
                                         cursor: hasSubmitted ? 'default' : 'pointer',
                                         transition: 'all 0.2s',
                                         bgcolor: userAnswers[qIndex] === oIndex
-                                            ? blue[50]
+                                            ? '#27896C' // Darker teal-green background
                                             : 'background.paper',
+                                        color: userAnswers[qIndex] === oIndex
+                                            ? 'white' // White text on dark bg
+                                            : 'inherit',
                                         border: userAnswers[qIndex] === oIndex
-                                            ? `2px solid ${blue[500]}`
+                                            ? `2px solid #46C190`
                                             : '1px solid',
                                         borderColor: 'divider',
                                         '&:hover': {
-                                            bgcolor: hasSubmitted ? 'background.paper' : blue[50],
+                                            bgcolor: hasSubmitted ? 'background.paper' : '#27896C', // Same dark green on hover
+                                            color: hasSubmitted ? 'inherit' : 'white',
                                         },
                                     }}
                                 >
@@ -180,13 +184,13 @@ const UserQuiz = ({ playbackId }) => {
                     </Button>
                 )}
                 {showResults && (
-                    <Alert 
-                        severity="success" 
+                    <Alert
+                        severity="success"
                         sx={{ mt: 2 }}
                     >
                         <Typography variant="body1" fontWeight="bold">
                             Quiz submitted! Your score: {
-                                Object.keys(userAnswers).filter(qIndex => 
+                                Object.keys(userAnswers).filter(qIndex =>
                                     quiz.questions[qIndex].correctAnswers.includes(userAnswers[qIndex])
                                 ).length
                             } / {quiz.questions.length}

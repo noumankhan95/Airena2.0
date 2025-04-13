@@ -22,7 +22,7 @@ export default function Header() {
   return (
     <AppBar position="static" color="success" className="!hidden md:!block">
       <Toolbar>
-        <Typography variant="h6">Admin Panel</Typography>
+        <Typography variant="h6">Your Account</Typography>
 
         {/* Theme Toggle */}
         {/* <Box>

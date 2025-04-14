@@ -94,7 +94,7 @@ const ProductOverlay = forwardRef(({ products, influencerId }, ref) => {
             }
             if (!isLoggedIn) {
                 sessionStorage.setItem('pendingProduct', JSON.stringify(product));
-                router.push('/user/SignIn');
+                router.push('/Authenticate/SignIn');
                 return;
             }
             setProcessingOrders((prev) => ({ ...prev, [product.node.id]: true }));

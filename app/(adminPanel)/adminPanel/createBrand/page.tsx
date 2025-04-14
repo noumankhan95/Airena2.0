@@ -110,7 +110,7 @@ const CreateVendorsAccount = () => {
     <Container maxWidth="sm" sx={{ mt: 4 }}>
       <Paper sx={{ padding: 3 }}>
         <Typography variant="h5" gutterBottom>
-          Create a Vendor Account
+          Create Brand Account
         </Typography>
         <form>
           {/* Name Input */}

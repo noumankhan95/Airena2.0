@@ -112,7 +112,7 @@ const CreateDealersAccount = () => {
     <Container maxWidth="sm" sx={{ mt: 4 }}>
       <Paper sx={{ padding: 3 }}>
         <Typography variant="h5" gutterBottom>
-          Create an Influencer Account
+          Creator Account
         </Typography>
         <form>
           {/* Name Input */}

@@ -146,7 +146,7 @@ export default function influencerPanel({
           <ListItemText primary="Upload Video" />
         </ListItem>
 
-        <ListItem
+        {/* <ListItem
           component={Link}
           href="/CreatorPanel/Agreement"
           sx={{ width: "90%" }}
@@ -155,7 +155,7 @@ export default function influencerPanel({
             <DescriptionIcon style={{ color: "white" }} />
           </ListItemIcon>
           <ListItemText primary="Agreement" />
-        </ListItem>
+        </ListItem> */}
 
         <ListItem
           component={Link}

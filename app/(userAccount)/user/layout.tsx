@@ -105,13 +105,27 @@ export default function DealerAdminPanel({
         </Link>
       </Toolbar>
       <List className="flex flex-col items-center justify-center">
-        <ListItem component={Link} href="/user/myAccount" sx={{ width: "90%" }}>
+        <ListItem
+          component={Link}
+          onClick={() => {
+            handleDrawerToggle();
+          }}
+          href="/user/myAccount"
+          sx={{ width: "90%" }}
+        >
           <ListItemIcon>
             <DashboardIcon sx={{ color: "white" }} />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
-        <ListItem component={Link} href="/user/Orders" sx={{ width: "90%" }}>
+        <ListItem
+          component={Link}
+          onClick={() => {
+            handleDrawerToggle();
+          }}
+          href="/user/Orders"
+          sx={{ width: "90%" }}
+        >
           <ListItemIcon>
             <ShoppingCartIcon sx={{ color: "white" }} />
           </ListItemIcon>
@@ -119,6 +133,9 @@ export default function DealerAdminPanel({
         </ListItem>
         <ListItem
           component={Link}
+          onClick={() => {
+            handleDrawerToggle();
+          }}
           href="/user/StoreOrders"
           sx={{ width: "90%" }}
         >
@@ -129,6 +146,9 @@ export default function DealerAdminPanel({
         </ListItem>
         <ListItem
           component={Link}
+          onClick={() => {
+            handleDrawerToggle();
+          }}
           href="/user/WatchHistory"
           sx={{ width: "90%" }}
         >
@@ -137,7 +157,14 @@ export default function DealerAdminPanel({
           </ListItemIcon>
           <ListItemText primary="My Watch History" />
         </ListItem>
-        <ListItem component={Link} href="/user/Profile" sx={{ width: "90%" }}>
+        <ListItem
+          component={Link}
+          onClick={() => {
+            handleDrawerToggle();
+          }}
+          href="/user/Profile"
+          sx={{ width: "90%" }}
+        >
           <ListItemIcon>
             <AccountCircleIcon sx={{ color: "white" }} />
           </ListItemIcon>

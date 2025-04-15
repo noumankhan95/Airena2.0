@@ -33,7 +33,7 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ArticleIcon from "@mui/icons-material/Article";
 import "./mainstyle.css";
-import { Email } from "@mui/icons-material";
+import { AdminPanelSettings, Email } from "@mui/icons-material";
 const drawerWidth = 270;
 
 export default function DealerAdminPanel({
@@ -158,7 +158,16 @@ export default function DealerAdminPanel({
           </ListItemIcon>
           <ListItemText primary="Commission Logs" />
         </ListItem>
-
+        <ListItem
+          component={Link}
+          sx={{ width: "90%" }}
+          href="/adminPanel/manageAdmins"
+        >
+          <ListItemIcon>
+            <AdminPanelSettings />
+          </ListItemIcon>
+          <ListItemText primary="Manage Admins" />
+        </ListItem>
         <ListItem
           component={Link}
           sx={{ width: "90%" }}

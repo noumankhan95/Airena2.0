@@ -176,11 +176,11 @@ const SignIn = () => {
           />
           <Box className="flex items-center justify-center !space-x-2">
             <Button
+              disabled={isLoading}
               fullWidth
               type="submit"
               variant="contained"
               color="primary"
-              disabled={isLoading}
               sx={{
                 color: "black",
                 p: 1.7,
@@ -211,6 +211,14 @@ const SignIn = () => {
             </Button>
           </Box>
         </form>
+        <Typography variant="body2" color="white" className="!mt-8">
+          <Link
+            href="/Authenticate/ResetPassword"
+            className="text-green-400 hover:underline !my-8"
+          >
+            Forgot Password?
+          </Link>
+        </Typography>
         <Typography
           variant="body2"
           color="textSecondary"

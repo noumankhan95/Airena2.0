@@ -117,11 +117,24 @@ type Influencer = {
   createdAt?: string;
   contactDetails: string;
 };
+type Admin = {
+  id: string;
+  name: string;
+  email: string;
+  createdAt?: string;
+};
 type InfluencerStore = {
   Influencers: Influencer[];
   setInfluencers: (Influencers: Influencer[]) => void;
   getInfluencerById: (id: string) => Influencer | undefined;
   fetchInfluencers: () => Promise<void>;
+  lastFetched: any;
+};
+type AdminStore = {
+  Admin: Admin[];
+  setAdmin: (Admin: Admin[]) => void;
+  getAdminById: (id: string) => Admin | undefined;
+  fetchAdmin: () => Promise<void>;
   lastFetched: any;
 };
 

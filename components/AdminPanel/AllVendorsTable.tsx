@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import useVendorStore from "@/store/adminPanel/vendorStore";
+import { toast } from "react-toastify";
+import { auth } from "@/firebase";
 
 function AllVendorsTable() {
   const { fetchVendor, Vendors } = useVendorStore();
@@ -37,7 +39,51 @@ function AllVendorsTable() {
   }, [searchQuery, Vendors]);
 
   const router = useRouter();
+  const [isLoading, setisloading] = useState<boolean>(false);
+  // Form submit handler
 
+  const handleSubmit = async (influencerId: string) => {
+    setisloading(true);
+    const id = toast.loading("Deleting Account");
+
+    try {
+      const token = await auth?.currentUser?.getIdToken();
+
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/DeleteVendor`,
+
+        {
+          body: JSON.stringify({ influencerId }),
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Include token in Authorization header
+          },
+        }
+      );
+      if (!res.ok) throw await res.json();
+      const body = await res.json();
+
+      toast.update(id, {
+        render: "Deleted,Refresh To See Changes",
+        isLoading: false,
+        closeButton: true,
+        autoClose: 5000,
+        type: "success",
+      });
+    } catch (e: any) {
+      console.log("Error", e);
+      toast.update(id, {
+        render: e.message,
+        isLoading: false,
+        closeButton: true,
+        autoClose: 5000,
+        type: "error",
+      });
+    } finally {
+      setisloading(false);
+    }
+  };
   return (
     <>
       <TextField
@@ -64,7 +110,7 @@ function AllVendorsTable() {
                 <TableCell>{vendor.name}</TableCell>
                 <TableCell>{vendor.email}</TableCell>
                 <TableCell>{vendor.contactDetails}</TableCell>
-                <TableCell>
+                <TableCell className="!space-x-3">
                   <Button
                     variant="text"
                     color="primary"
@@ -73,6 +119,16 @@ function AllVendorsTable() {
                     }}
                   >
                     View
+                  </Button>
+                  <Button
+                    variant="text"
+                    color="primary"
+                    onClick={() => {
+                      handleSubmit(vendor.id);
+                    }}
+                    disabled={isLoading}
+                  >
+                    Delete
                   </Button>
                 </TableCell>
               </TableRow>

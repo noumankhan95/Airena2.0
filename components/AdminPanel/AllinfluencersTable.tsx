@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import useInfluencerStore from "@/store/adminPanel/influencersStore";
+import { toast } from "react-toastify";
+import { auth } from "@/firebase";
 
 function AllInfluencersTable() {
   const { fetchInfluencers, Influencers } = useInfluencerStore();
@@ -38,7 +40,49 @@ function AllInfluencersTable() {
   }, [searchQuery, Influencers]);
 
   const router = useRouter();
+  const [isLoading, setisloading] = useState<boolean>(false);
 
+  const handleSubmit = async (influencerId: string) => {
+    setisloading(true);
+    const id = toast.loading("Deleting Account");
+
+    try {
+      const token = await auth?.currentUser?.getIdToken();
+
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/DeleteInfluencer`,
+        {
+          body: JSON.stringify({ influencerId }),
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Include token in Authorization header
+          },
+        }
+      );
+      if (!res.ok) throw await res.json();
+      const body = await res.json();
+
+      toast.update(id, {
+        render: "Deleted,Refresh To See Changes",
+        isLoading: false,
+        closeButton: true,
+        autoClose: 5000,
+        type: "success",
+      });
+    } catch (e: any) {
+      console.log("Error", e);
+      toast.update(id, {
+        render: e.message,
+        isLoading: false,
+        closeButton: true,
+        autoClose: 5000,
+        type: "error",
+      });
+    } finally {
+      setisloading(false);
+    }
+  };
   return (
     <>
       <TextField
@@ -65,7 +109,7 @@ function AllInfluencersTable() {
                 <TableCell>{influencer.name}</TableCell>
                 <TableCell>{influencer.email}</TableCell>
                 <TableCell>{influencer.contactDetails}</TableCell>
-                <TableCell>
+                <TableCell className="!space-x-3">
                   <Button
                     variant="text"
                     color="primary"
@@ -76,6 +120,16 @@ function AllInfluencersTable() {
                     }}
                   >
                     View
+                  </Button>
+                  <Button
+                    variant="text"
+                    color="primary"
+                    onClick={() => {
+                      handleSubmit(influencer.id);
+                    }}
+                    disabled={isLoading}
+                  >
+                    Delete
                   </Button>
                 </TableCell>
               </TableRow>

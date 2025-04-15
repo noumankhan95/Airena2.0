@@ -3,7 +3,7 @@ import { useState } from "react";
 import { submitContactForm } from "@/app/actions/contact";
 import SubmitButton from "@/components/ContactFormSubmit";
 import { TextField } from "@mui/material";
-
+import { toast } from "react-toastify";
 export default function ContactPage() {
   const [status, setStatus] = useState<"success" | "error" | null>(null);
   const [message, setMessage] = useState("");
@@ -11,7 +11,16 @@ export default function ContactPage() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
 
+    if (!name || !email || !message) {
+      return toast.error("Please Enter All Information");
+    }
+    if (/\d/.test(name)) {
+      return toast.error("Name contains a number");
+    }
     const response = await submitContactForm(formData);
     console.log(response);
     //@ts-ignore

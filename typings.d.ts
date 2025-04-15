@@ -164,7 +164,7 @@ interface ProfileState {
   twitter: string;
   instagram: string;
   youtube: string;
-  category: string;
+  category: Array<string>;
   channel?: string;
   estimatedEarnings: number;
   profilePic: any;
@@ -178,7 +178,7 @@ interface ProfileState {
     twitter: string;
     instagram: string;
     youtube: string;
-    category: string;
+    category: Array<string>;
     channel?: string;
     estimatedEarnings: number;
     profilePic: any;

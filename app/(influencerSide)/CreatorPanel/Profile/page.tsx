@@ -35,7 +35,7 @@ export default function StreamingSetup() {
     twitter,
     instagram,
     youtube,
-    category,
+    category: category || [],
   });
   const [isLoading, setisLoading] = useState<boolean>(false);
 
@@ -48,8 +48,17 @@ export default function StreamingSetup() {
     setProfileData({ ...profileData, [e.target.name]: e.target.value });
   };
 
-  const handleCategorySelect = (category: string) => {
-    setProfileData((prev) => ({ ...prev, category }));
+  const handleCategorySelect = (selectedCategory: string) => {
+    setProfileData((prev) => {
+      const currentCategories = prev.category || [];
+      const isSelected = currentCategories.includes(selectedCategory);
+      return {
+        ...prev,
+        category: isSelected
+          ? currentCategories.filter((cat) => cat !== selectedCategory)
+          : [...currentCategories, selectedCategory],
+      };
+    });
   };
 
   const handleProfilePicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,7 +117,7 @@ export default function StreamingSetup() {
       setisLoading(false);
     }
   };
-
+  console.log(profileData);
   return (
     <div className="min-h-screen p-8 text-white space-y-4">
       {/* Header */}
@@ -151,8 +160,8 @@ export default function StreamingSetup() {
           <Card
             onClick={() => handleCategorySelect("Gaming")}
             className={`p-6 shadow-lg flex flex-col items-start space-x-4 cursor-pointer transform transition-all duration-300 ${
-              profileData.category === "Gaming"
-                ? "border border-indigo-400"
+              profileData.category.includes("Gaming")
+                ? "border border-green-400"
                 : ""
             }`}
             style={{ backgroundColor: "#141414" }}
@@ -172,7 +181,9 @@ export default function StreamingSetup() {
           <Card
             onClick={() => handleCategorySelect("Sports")}
             className={`p-6 shadow-lg flex flex-col items-start space-x-4 cursor-pointer transform transition-all duration-300 ${
-              profileData.category === "Sports" ? "border border-green-400" : ""
+              profileData.category.includes("Sports")
+                ? "border border-indigo-400"
+                : ""
             }`}
             style={{ backgroundColor: "#141414" }}
           >

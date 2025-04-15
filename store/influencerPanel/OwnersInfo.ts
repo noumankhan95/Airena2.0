@@ -9,7 +9,7 @@ const useInfluencersInfo = create<ProfileState>((set, get) => ({
   twitter: "",
   instagram: "",
   youtube: "",
-  category: "",
+  category: [],
   estimatedEarnings: 0,
   profilePic: "",
   followers: 0,

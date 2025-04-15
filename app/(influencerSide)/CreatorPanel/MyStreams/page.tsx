@@ -19,7 +19,7 @@ import {
 import useInfluencersInfo from "@/store/influencerPanel/OwnersInfo";
 import ReactPlayer from "react-player";
 import { toast } from "react-toastify";
-
+import { v4 } from "uuid";
 export default function StreamsPage() {
   const [streams, setStreams] = useState<any>();
   const [search, setSearch] = useState("");
@@ -92,30 +92,52 @@ export default function StreamsPage() {
           <CircularProgress />
         </div>
       ) : (
-        <Grid container spacing={3}>
+        <Grid container spacing={3} className="hover:cursor-pointer">
           {filteredStreams?.map((stream: any) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={stream.id}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              key={v4()}
+              sx={{ display: "flex" }}
+            >
               <Card
                 className="bg-gray-800 shadow-lg"
+                sx={{
+                  height: "100%", // Let card stretch to match grid item
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
                 onClick={() => handleStreamClick(stream)}
               >
-                {/* Video Thumbnail */}
                 <CardMedia
                   component="img"
-                  height="180"
                   image={stream.thumbnailURL}
                   alt={stream.title}
-                  className="rounded-t-lg"
+                  sx={{
+                    height: 180,
+                    objectFit: "cover",
+                    borderTopLeftRadius: 8,
+                    borderTopRightRadius: 8,
+                  }}
                 />
-
-                <CardContent>
-                  {/* Title */}
-                  <Typography variant="h6" className="text-white mt-2">
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography variant="h6" className="text-white mt-2" noWrap>
                     {stream.title}
                   </Typography>
-
-                  {/* Streamer & Category */}
-                  <Typography variant="body2" className="text-gray-400">
+                  {stream.name && (
+                    <Typography
+                      variant="body2"
+                      className="text-white mt-1"
+                      noWrap
+                    >
+                      By {stream.name}
+                    </Typography>
+                  )}
+                  <Typography variant="body2" className="text-gray-400" noWrap>
                     {stream.category}
                   </Typography>
                 </CardContent>

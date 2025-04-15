@@ -19,7 +19,7 @@ export default function ListDealers() {
         }}
       >
         <Typography variant="h4" component="h1">
-          Vendors
+          Brands
         </Typography>
       </Box>
 

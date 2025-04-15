@@ -93,13 +93,25 @@ export default function StreamsPage() {
         <Grid container spacing={3} className="hover:cursor-pointer">
           {filteredStreams?.map((stream: any) =>
             stream?.visibility === "public" ? (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={uuidv4()}>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                key={uuidv4()}
+                sx={{ display: "flex" }}
+              >
                 <Card
                   className="bg-gray-800 shadow-lg"
-                  sx={{ height: 350, display: "flex", flexDirection: "column" }}
+                  sx={{
+                    height: "100%", // Let card stretch to match grid item
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
                   onClick={() => handleStreamClick(stream)}
                 >
-                  {/* Video Thumbnail */}
                   <CardMedia
                     component="img"
                     image={stream.thumbnailURL}
@@ -111,9 +123,7 @@ export default function StreamsPage() {
                       borderTopRightRadius: 8,
                     }}
                   />
-
                   <CardContent sx={{ flexGrow: 1 }}>
-                    {/* Title */}
                     <Typography variant="h6" className="text-white mt-2" noWrap>
                       {stream.title}
                     </Typography>
@@ -126,7 +136,6 @@ export default function StreamsPage() {
                         By {stream.name}
                       </Typography>
                     )}
-                    {/* Streamer & Category */}
                     <Typography
                       variant="body2"
                       className="text-gray-400"

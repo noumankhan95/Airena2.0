@@ -112,7 +112,7 @@ function AdminPage() {
               color="primary"
               gutterBottom
             >
-              Total Registered Influencers
+              Total Registered Creators
             </Typography>
             <Typography variant="body1">{registeredDealers}</Typography>
           </Paper>

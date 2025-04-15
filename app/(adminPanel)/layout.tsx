@@ -103,7 +103,7 @@ export default function DealerAdminPanel({
           <ListItemIcon>
             <PeopleIcon />
           </ListItemIcon>
-          <ListItemText primary="Create Influencer Account" />
+          <ListItemText primary="Create Creator Account" />
         </ListItem>
         <ListItem
           component={Link}

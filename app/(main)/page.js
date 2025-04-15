@@ -82,7 +82,7 @@ export default function Home() {
       {/* <Navbar /> */}
 
       <main>
-        <Hero />
+        {/* <Hero /> */}
         {/* <HeroSection /> */}
 
         <SHero />
@@ -93,21 +93,21 @@ export default function Home() {
           {/* <div className="max-w-6xl mx-auto px-4 py-8">
             <TournamentCard />
           </div> */}
-          <VideoSec />
+          {/* <VideoSec /> */}
 
-          <TournamentMatchup />
+          {/* <TournamentMatchup /> */}
 
 
 
           <FoundersClub />
 
-          <LeaderboardSection />
+          {/* <LeaderboardSection /> */}
 
           {/* <VideoSlider /> */}
 
           {/* <VideoSection withPagination={true} /> */}
 
-          <EventsSection />
+          {/* <EventsSection /> */}
         </div>
       </main>
 

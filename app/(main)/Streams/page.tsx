@@ -96,29 +96,42 @@ export default function StreamsPage() {
               <Grid item xs={12} sm={6} md={4} lg={3} key={uuidv4()}>
                 <Card
                   className="bg-gray-800 shadow-lg"
+                  sx={{ height: 350, display: "flex", flexDirection: "column" }}
                   onClick={() => handleStreamClick(stream)}
                 >
                   {/* Video Thumbnail */}
                   <CardMedia
                     component="img"
-                    height="180"
                     image={stream.thumbnailURL}
                     alt={stream.title}
-                    className="rounded-t-lg"
+                    sx={{
+                      height: 180,
+                      objectFit: "cover",
+                      borderTopLeftRadius: 8,
+                      borderTopRightRadius: 8,
+                    }}
                   />
 
-                  <CardContent>
+                  <CardContent sx={{ flexGrow: 1 }}>
                     {/* Title */}
-                    <Typography variant="h6" className="text-white mt-2">
+                    <Typography variant="h6" className="text-white mt-2" noWrap>
                       {stream.title}
                     </Typography>
                     {stream.name && (
-                      <Typography variant="h6" className="text-white mt-2">
+                      <Typography
+                        variant="body2"
+                        className="text-white mt-1"
+                        noWrap
+                      >
                         By {stream.name}
                       </Typography>
                     )}
                     {/* Streamer & Category */}
-                    <Typography variant="body2" className="text-gray-400">
+                    <Typography
+                      variant="body2"
+                      className="text-gray-400"
+                      noWrap
+                    >
                       {stream.category}
                     </Typography>
                   </CardContent>

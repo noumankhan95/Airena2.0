@@ -57,6 +57,7 @@ export default function influencerPanel({
         setLoading(true);
         if (user) {
           const tokenResult = await user.getIdTokenResult();
+          console.log("tokenResult", tokenResult.claims.influencer);
           if (!tokenResult.claims.influencer) throw "Unauthorized";
           const res = await getDoc(doc(db, "influencers", user.uid));
           console.log(res.data(), "testing the response data");
@@ -73,7 +74,7 @@ export default function influencerPanel({
             channel: res.data()?.channel || "",
             estimatedEarnings: res.data()?.earnings || 0,
             profilePic: res.data()?.profilePic || "",
-            followers: res.data()?.followers.length || 0,
+            followers: res.data()?.followers?.length || 0,
           });
 
           setIsAdmin(!!tokenResult.claims.influencer);
@@ -82,6 +83,7 @@ export default function influencerPanel({
           router.replace("/Authenticate/CreatorPanel");
         }
       } catch (e) {
+        console.log(e, "error");
         setIsAdmin(false);
         toast.error("Unauthorized Email");
         router.replace("/Authenticate/CreatorPanel");

@@ -85,8 +85,21 @@ export default function Chat() {
       )
     );
   }, [searchQuery, vendors]);
-  const sendMessage = async (e: any) => {
-    e.preventDefault();
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        // alert("Pressed");
+        sendMessage();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [newMessage, image, uid, selectedVendor]);
+  const sendMessage = async () => {
     try {
       setLoading(true);
       if (!newMessage.trim() && !image) return;

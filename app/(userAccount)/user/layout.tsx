@@ -238,10 +238,7 @@ export default function DealerAdminPanel({
         </Drawer>
 
         {/* Main content */}
-        <Box
-          component="main"
-          sx={{ flexGrow: 1, backgroundColor: "black", mt: { xs: 8, md: 0 } }}
-        >
+        <Box component="main" sx={{ flexGrow: 1, mt: { xs: 8, md: 0 } }}>
           <Header />
           {children}
         </Box>

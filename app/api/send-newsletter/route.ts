@@ -38,9 +38,9 @@ export async function POST(req: NextRequest) {
       `;
       await transporter.sendMail({
         from: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
-        to: emailHtml,
+        to: email,
         subject,
-        html,
+        html: emailHtml,
       });
     }
 

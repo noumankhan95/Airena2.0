@@ -22,6 +22,7 @@ type dealersInfo = {
   email: string;
   uid: string;
   interests?: Array<String>;
+  following?: Array<string>;
   notificationPreferences?: {
     liveStream: boolean;
     newContent: boolean;

@@ -58,6 +58,7 @@ export default function DealerAdminPanel({
             contactDetails: res.data()!.contactDetails,
             vehicles: res.data()!.vehicles || [],
             interests: res.data()!.interests || [],
+            following: res.data()!.following || [],
             notificationPreferences: res.data()!.notificationPreferences || {
               liveStream: false,
               newContent: false,

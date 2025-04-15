@@ -52,7 +52,7 @@ export default function NewsletterForm() {
         className="p-2 rounded-md w-64"
         required
       />
-      <Button type="submit" variant="contained" className="!my-2 !p-2 ">
+      <Button type="submit" variant="contained" className="!mt-6 !p-2 ">
         {loading ? <CircularProgress size={24} color="inherit" /> : "Subscribe"}
       </Button>
     </form>

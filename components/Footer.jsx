@@ -55,7 +55,7 @@ export default function Footer() {
                 </Grid>
 
                 {/* Divider Line */}
-                <Box sx={{ borderBottom: "1px solid rgba(255, 255, 255, 0.1)", my: 3 }} />
+                <Box sx={{ borderBottom: "1px solid rgba(255, 255, 255, 0.1)", my: 1 }} />
                 {/* Social Icons */}
                 {/* <Box display="flex" justifyContent="center" gap={2} mb={3}>
                     <IconButton href="#" sx={{ color: "#57F287" }}>

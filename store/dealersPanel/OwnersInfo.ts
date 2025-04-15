@@ -8,6 +8,7 @@ const useOwnersStore = create<DealersOwnersStore>((set, get) => ({
     contactDetails: "",
     vehicles: [],
     interests: [],
+    following: [],
     notificationPreferences: {
       liveStream: false,
       newContent: false,
@@ -27,6 +28,7 @@ const useOwnersStore = create<DealersOwnersStore>((set, get) => ({
         contactDetails: d.contactDetails,
         vehicles: d.vehicles,
         interests: d.interests || [],
+        following: d.following || [],
         notificationPreferences: d.notificationPreferences || {
           liveStream: false,
           newContent: false,

@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
     return (
         <>
             <Navbar />
-            <main className="w-full max-w-screen-xl m-auto">
+            <main className="w-full  m-auto">
                 {children}
             </main>
             <footer>

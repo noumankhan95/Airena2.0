@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     return (
         <>
             <Navbar />
-            <main className="relative  min-h-screen">
+            <main className="relative min-h-screen">
                 <GamingBackground />
                 {children}
             </main>

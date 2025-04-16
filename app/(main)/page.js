@@ -44,50 +44,57 @@ export default function Home() {
 
       <SHero />
       <section className="my-12 p-5 flex justify-center">
-        <div className="w-full ">
-          <Typography variant="h6" className="font-semibold text-white mb-6" sx={{ color: "white !important" }}>
+        <div className="w-full">
+          <Typography
+            variant="h6"
+            className="font-semibold text-white mb-6"
+            sx={{ color: "white !important" }}
+          >
             Browse Categories
           </Typography>
 
-          <div className="flex flex-col lg:flex-row gap-2 justify-around py-5" >
+          <div className="flex flex-col lg:flex-row lg:justify-around gap-4 py-5">
             {/* Gaming Card */}
             <Card
-              className="p-6 shadow-lg flex flex-col w-full lg:w-3/5 items-start cursor-pointer transform transition-all duration-300 shadow-green-400"
+              className="p-6 shadow-lg flex flex-col w-full lg:w-[30%] items-start cursor-pointer transition-all duration-300 shadow-green-400"
               style={{ backgroundColor: "#050505" }}
-              onClick={() => { router.push("/Categories") }}
+              onClick={() => router.push("/Categories")}
             >
-              <FaGamepad
-                className="text-indigo-300 text-3xl mb-2"
-                style={{ color: "#46C190" }}
-              />
-              <Typography variant="h6" className="font-semibold" sx={{ color: "white !important" }}>
+              <FaGamepad className="text-3xl mb-2" style={{ color: "#46C190" }} />
+              <Typography
+                variant="h6"
+                className="font-semibold"
+                sx={{ color: "white !important" }}
+              >
                 Gaming
               </Typography>
-              <Typography variant="body2" className="!my-4">
+              <Typography variant="body2" className="!my-4 text-white">
                 290K Viewers
               </Typography>
             </Card>
 
             {/* Sports Card */}
             <Card
-              className="p-6 shadow-lg flex flex-col w-full lg:w-3/5 items-start cursor-pointer transform transition-all duration-300 shadow-green-400"
+              className="p-6 shadow-lg flex flex-col w-full lg:w-[30%] items-start cursor-pointer transition-all duration-300 shadow-green-400"
               style={{ backgroundColor: "#050505" }}
-              onClick={() => { router.push("/Categories") }}
+              onClick={() => router.push("/Categories")}
             >
-              <FaFootballBall
-                className="text-indigo-300 text-3xl mb-2"
-                style={{ color: "#46C190" }}
-              />
-              <Typography variant="h6" className="font-semibold" sx={{ color: "white !important" }}>
+              <FaFootballBall className="text-3xl mb-2" style={{ color: "#46C190" }} />
+              <Typography
+                variant="h6"
+                className="font-semibold"
+                sx={{ color: "white !important" }}
+              >
                 Sports
               </Typography>
-              <Typography variant="body2" className="!my-4">
+              <Typography variant="body2" className="!my-4 text-white">
                 450K Viewers
               </Typography>
             </Card>
           </div>
         </div>
       </section>
+
 
       <div id="categorypills" className=" p-6">
         <CategoryPills />

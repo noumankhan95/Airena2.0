@@ -201,7 +201,7 @@ export default function ProductFetcher() {
 
 function ProductCard({ airena }: { airena: any }) {
   const [hovered, setHovered] = useState(false);
-  const productUrl = `/product/${airena?.ProdID}`;
+  const productUrl = `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/products/${airena?.Handle}`;
 
   return (
     <Card
@@ -345,7 +345,7 @@ function ShopifyProductCard({ shopify }: { shopify: any }) {
           {shopify.title}
         </Typography>
 
-        {shopify.variants?.edges?.length > 1 ? (
+        {/* {shopify.variants?.edges?.length > 1 ? (
           <>
             <Divider sx={{ my: 1.5, borderColor: "#334155" }} />
             <Box display="flex" flexDirection="column" gap={0.5}>
@@ -371,7 +371,7 @@ function ShopifyProductCard({ shopify }: { shopify: any }) {
           >
             {shopify.variants?.edges?.[0]?.node.price} INR
           </Typography>
-        )}
+        )} */}
       </CardContent>
 
       <Box px={3} pb={3}>

@@ -67,7 +67,7 @@ export default async function VideoPage({ params }) {
           </Box>
           <Box display="flex" alignItems="center" mb={1}>
             <Avatar
-              src={influencer.profilePic}
+              src={influencer?.profilePic}
               sx={{ width: 40, height: 40, mr: 1 }}
             />
             <Box className="flex flex-col" >

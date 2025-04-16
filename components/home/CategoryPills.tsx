@@ -587,7 +587,7 @@ const GameCategories = () => {
           {/* Stream display section */}
           <div className="max-w-screen-xl mx-auto mt-8 p-4">
             <h2 className="text-2xl font-bold mb-4 text-green-500">
-              {activeCategory} Streams
+              Trending {activeCategory} Streams
             </h2>
 
             {filteredStreams.length > 0 ? (

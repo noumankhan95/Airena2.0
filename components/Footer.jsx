@@ -58,22 +58,22 @@ export default function Footer() {
                 <Box sx={{ borderBottom: "1px solid rgba(255, 255, 255, 0.1)", my: 1 }} />
                 {/* Social Icons */}
                 <Box display="flex" justifyContent="center" gap={2} mb={3}>
-                    <IconButton href="https://www.linkedin.com/company/105713554/admin/dashboard/" sx={{ color: "#57F287" }}>
+                    <IconButton href="https://www.linkedin.com/company/105713554/admin/dashboard/" target="_blank" sx={{ color: "#57F287" }}>
                         <LinkedIn />
                     </IconButton>
-                    <IconButton href="https://www.instagram.com/airena.app?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" sx={{ color: "#57F287" }}>
+                    <IconButton href="https://www.instagram.com/airena.app?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" sx={{ color: "#57F287" }}>
                         <Instagram />
                     </IconButton>
-                    <IconButton href="https://www.facebook.com/61572648736754/" sx={{ color: "#57F287" }}>
+                    <IconButton href="https://www.facebook.com/61572648736754/" target="_blank" sx={{ color: "#57F287" }}>
                         <Facebook size={24} />
                     </IconButton>
-                    {/* <IconButton href="#" sx={{ color: "#57F287" }}>
+                    {/* <IconButton href="#" target="_blank" sx={{ color: "#57F287" }}>
                         <YouTube />
                     </IconButton>
-                    <IconButton href="#" sx={{ color: "#57F287" }}>
+                    <IconButton href="#" target="_blank" sx={{ color: "#57F287" }}>
                         <FaGamepad size={24} />
                     </IconButton>
-                    <IconButton href="#" sx={{ color: "#57F287" }}>
+                    <IconButton href="#" target="_blank" sx={{ color: "#57F287" }}>
                         <FaDiscord size={24} />
                     </IconButton> */}
                 </Box>

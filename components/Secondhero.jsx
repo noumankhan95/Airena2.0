@@ -22,8 +22,8 @@ const SHero = () => {
       <Image src={slide.image} alt={slide.title} fill style={{ objectFit: 'cover', width: '100%', height: '100%' }} className="opacity-40" />
 
       {/* Content */}
-      <div className="absolute inset-0 flex items-center justify-start px-8 m-0">
-        <div className="relative z-10 max-w-lg">
+      <div className="absolute inset-0 flex items-center justify-start  m-0">
+        <div className="relative z-10 max-w-lg p-5">
           <h1 className="text-4xl md:text-6xl font-bold">{slide.title}</h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300">{slide.description}</p>
           <div className="mt-6 flex gap-4">

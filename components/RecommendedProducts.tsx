@@ -191,7 +191,7 @@ export default function ProductFetcher() {
   }
   console.log("prodcts", products);
   return (
-    <Box sx={{ p: 1, minHeight: "100vh" }}>
+    <Box sx={{ p: 5, minHeight: "100vh" }}>
       <Typography variant="h6" gutterBottom>
         {uid ? "Recommended Products" : "Products"}
       </Typography>

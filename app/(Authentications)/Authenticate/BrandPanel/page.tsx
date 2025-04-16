@@ -56,7 +56,7 @@ const Authenticate = () => {
   };
 
   return (
-    <Box className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0A1A0E] to-[#07150A]">
+    <Box className="min-h-screen flex items-center justify-center ">
       <Container
         maxWidth="xs"
         className="bg-[#0D1F12] p-8 rounded-2xl shadow-lg flex flex-col items-center"

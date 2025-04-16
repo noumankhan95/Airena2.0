@@ -61,13 +61,13 @@ export default async function BlogPost({ params }: any) {
           <img
             src={serializedBlog?.thumbnailUrl}
             alt="Blog Thumbnail"
-            className="w-full h-auto rounded-lg shadow-md mb-6"
+            className="w-full h-auto rounded-lg shadow-md mb-6 "
           />
         )}
 
         {/* Blog Content */}
         <div
-          className="mt-4 text-lg leading-relaxed text-gray-800"
+          className="mt-4 text-lg leading-relaxed text-white"
           dangerouslySetInnerHTML={{ __html: serializedBlog?.content }}
         />
 

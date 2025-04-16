@@ -127,7 +127,7 @@ const SignUp = () => {
   };
 
   return (
-    <Box className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#0A1A0E] to-[#07150A] p-4">
+    <Box className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b p-4">
       {/* Navigation */}
       {/* <Box className="absolute top-4 right-8 flex space-x-6">
         <Link href="/" className="text-gray-400 hover:text-white">

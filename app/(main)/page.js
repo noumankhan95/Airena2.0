@@ -39,83 +39,78 @@ export default function Home() {
   }, []);
   const router = useRouter()
   return (
-    <div className="min-h-screen text-white">
-      {/* <Navbar /> */}
+    <div className="min-h-screen text-white w-full">
 
-      <main>
-        {/* <Hero /> */}
-        {/* <HeroSection /> */}
 
-        <SHero />
-        <section className="my-12 p-5 flex justify-center">
-          <div className="w-full ">
-            <Typography variant="h6" className="font-semibold text-white mb-6" sx={{ color: "white !important" }}>
-              Browse Categories
-            </Typography>
+      <SHero />
+      <section className="my-12 p-5 flex justify-center">
+        <div className="w-full ">
+          <Typography variant="h6" className="font-semibold text-white mb-6" sx={{ color: "white !important" }}>
+            Browse Categories
+          </Typography>
 
-            <div className="flex justify-around py-5" >
-              {/* Gaming Card */}
-              <Card
-                className="p-6 shadow-lg flex flex-col items-start cursor-pointer transform transition-all duration-300 shadow-green-400"
-                style={{ backgroundColor: "#050505", width: '25%', height: "40%" }}
-                onClick={() => { router.push("/Categories") }}
-              >
-                <FaGamepad
-                  className="text-indigo-300 text-3xl mb-2"
-                  style={{ color: "#46C190" }}
-                />
-                <Typography variant="h6" className="font-semibold" sx={{ color: "white !important" }}>
-                  Gaming
-                </Typography>
-                <Typography variant="body2" className="!my-4">
-                  290K Viewers
-                </Typography>
-              </Card>
+          <div className="flex justify-around py-5" >
+            {/* Gaming Card */}
+            <Card
+              className="p-6 shadow-lg flex flex-col items-start cursor-pointer transform transition-all duration-300 shadow-green-400"
+              style={{ backgroundColor: "#050505", width: '25%', height: "40%" }}
+              onClick={() => { router.push("/Categories") }}
+            >
+              <FaGamepad
+                className="text-indigo-300 text-3xl mb-2"
+                style={{ color: "#46C190" }}
+              />
+              <Typography variant="h6" className="font-semibold" sx={{ color: "white !important" }}>
+                Gaming
+              </Typography>
+              <Typography variant="body2" className="!my-4">
+                290K Viewers
+              </Typography>
+            </Card>
 
-              {/* Sports Card */}
-              <Card
-                className="p-6 shadow-lg flex flex-col items-start cursor-pointer transform transition-all duration-300 shadow-green-400"
-                style={{ backgroundColor: "#050505", width: '25%', height: "40%" }}
-                onClick={() => { router.push("/Categories") }}
-              >
-                <FaFootballBall
-                  className="text-indigo-300 text-3xl mb-2"
-                  style={{ color: "#46C190" }}
-                />
-                <Typography variant="h6" className="font-semibold" sx={{ color: "white !important" }}>
-                  Sports
-                </Typography>
-                <Typography variant="body2" className="!my-4">
-                  450K Viewers
-                </Typography>
-              </Card>
-            </div>
+            {/* Sports Card */}
+            <Card
+              className="p-6 shadow-lg flex flex-col items-start cursor-pointer transform transition-all duration-300 shadow-green-400"
+              style={{ backgroundColor: "#050505", width: '25%', height: "40%" }}
+              onClick={() => { router.push("/Categories") }}
+            >
+              <FaFootballBall
+                className="text-indigo-300 text-3xl mb-2"
+                style={{ color: "#46C190" }}
+              />
+              <Typography variant="h6" className="font-semibold" sx={{ color: "white !important" }}>
+                Sports
+              </Typography>
+              <Typography variant="body2" className="!my-4">
+                450K Viewers
+              </Typography>
+            </Card>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <div id="categorypills" className=" p-6">
-          <CategoryPills />
+      <div id="categorypills" className=" p-6">
+        <CategoryPills />
 
-          {/* <div className="max-w-6xl mx-auto px-4 py-8">
+        {/* <div className="max-w-6xl mx-auto px-4 py-8">
             <TournamentCard />
           </div> */}
-          {/* <VideoSec /> */}
+        {/* <VideoSec /> */}
 
-          {/* <TournamentMatchup /> */}
+        {/* <TournamentMatchup /> */}
 
 
 
-          <FoundersClub />
+        <FoundersClub />
 
-          {/* <LeaderboardSection /> */}
+        {/* <LeaderboardSection /> */}
 
-          {/* <VideoSlider /> */}
+        {/* <VideoSlider /> */}
 
-          {/* <VideoSection withPagination={true} /> */}
+        {/* <VideoSection withPagination={true} /> */}
 
-          {/* <EventsSection /> */}
-        </div>
-      </main>
+        {/* <EventsSection /> */}
+      </div>
 
       {/* <footer className="bg-black py-8 border-t border-gray-900">
         <div className="max-w-6xl mx-auto px-4 text-center">

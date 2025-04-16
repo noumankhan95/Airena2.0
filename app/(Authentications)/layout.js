@@ -8,8 +8,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <>
+        <main
+            style={{
+                background:
+                    "linear-gradient(135deg, #0b0b0b 0%, #122c1f 50%, #0b0b0b 100%)",
+            }}
+        >
             {children}
-        </>
+        </main>
     );
 }

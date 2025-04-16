@@ -9,7 +9,7 @@ import {
   CardContent,
   CardActions,
 } from "@mui/material";
-
+import { Pen } from "lucide-react";
 async function fetchBlogs(type = "recent", page = 1, startAfter = null) {
   try {
     const query = new URLSearchParams({
@@ -66,8 +66,12 @@ export default async function BlogPage({ searchParams }: any) {
                         minute: "numeric",
                       })}
                 </Typography>
-                <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                  {blog.author}
+                <Typography
+                  variant="body2"
+                  className="flex items-center justify-start"
+                  sx={{ fontWeight: 400 }}
+                >
+                  <Pen size={12} className="mr-2" /> {"    By "} {blog.author}
                 </Typography>
                 <Typography
                   variant="body1"

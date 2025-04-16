@@ -101,7 +101,7 @@ export const createStream = async (formData) => {
         const title = formData.get('title');
         const category = formData.get('category');
         const influencerId = formData.get('influencerId'); // Get influencer ID from form data
-
+        const influencerName = formData.get("influencerName")
         if (!influencerId) {
             throw new Error('Influencer ID is required');
         }
@@ -110,6 +110,8 @@ export const createStream = async (formData) => {
         console.log("Stream in action", stream)
         // Create a new stream document under the influencer's document
         const streamData = {
+            influencerId,
+            influencerName: influencerName,
             title: title,
             category: category,
             streamId: stream.id,

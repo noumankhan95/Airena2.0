@@ -5,14 +5,15 @@ import Likes from "@/components/Likes";
 import Views from '@/components/Views';
 import InteractiveComponents from '@/components/InteractiveComponents';
 import WatchProductOverlay from '@/components/WatchProductOverlay';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc } from 'firebase/firestore';
 import { db } from '@/firebase';
 import UserFollowButton from '@/components/UserFollowButton';
 import LiveChat from '@/components/LiveChat';
 import LiveComments from '@/components/LiveComments';
 import LiveCommentInput from '@/components/LiveCommentInput';
 import ShareButtons from '@/components/SocialMediaShare';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { Avatar } from "@mui/material";
 async function getStreamByPlaybackId(playbackId) {
   const snapshot = await getDocs(collection(db, 'streams'));
   for (const doc of snapshot.docs) {
@@ -29,11 +30,20 @@ async function getStreamByPlaybackId(playbackId) {
   }
   return null;
 }
-
+async function getInfluencerFromStream(infid) {
+  const snapshot = await getDoc(doc(db, 'influencers', infid));
+  if (snapshot.exists()) {
+    return snapshot.data()
+  }
+  return null
+}
 export default async function VideoPage({ params }) {
   const { playbackId } = await params;
   const src = await getPlaybackInfo(playbackId);
   const streamData = await getStreamByPlaybackId(playbackId);
+  const influencer = await getInfluencerFromStream(streamData.influencerId)
+  console.log(influencer, "influencer")
+  console.log(streamData, "streamData")
 
   return (
     <div className='w-full p-4 m-auto space-y-6 max-w-7xl  text-white'>
@@ -55,6 +65,22 @@ export default async function VideoPage({ params }) {
 
             <WatchProductOverlay streamData={streamData} />
           </Box>
+          <Box display="flex" alignItems="center" mb={1}>
+            <Avatar
+              src={influencer.profilePic}
+              sx={{ width: 40, height: 40, mr: 1 }}
+            />
+            <Box className="flex flex-col" >
+              <Typography variant="h5" sx={{ color: 'white !important', fontSize: '18px' }}>{streamData?.title}</Typography>
+              <Box className="flex items-center justify-center">
+                <Typography variant="body2">{influencer?.name}</Typography>
+                <Typography variant="body2" sx={{ mx: 2 }}>|</Typography>
+                <Typography variant="body2">{streamData?.category}</Typography>
+              </Box>
+            </Box>
+          </Box>
+
+
           <ShareButtons />
 
           {/* Stats and Follow Button Row */}

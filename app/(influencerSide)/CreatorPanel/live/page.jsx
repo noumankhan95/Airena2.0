@@ -32,6 +32,7 @@ function LivePage() {
     });
 
     formData.append('influencerId', uid);
+    formData.append("influencerName", name)
     await createStream(formData);  // Create the stream with the form data
 
     toast.success('Your stream has been created!');

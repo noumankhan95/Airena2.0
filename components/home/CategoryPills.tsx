@@ -495,6 +495,11 @@ const StreamCard = ({ stream }: any) => {
           <p className="text-sm " style={{ color: "#46C190" }}>
             {stream.category}
           </p>
+          {stream?.influencerName && (
+            <p className="text-sm " style={{ color: "#46C190" }}>
+              By {stream.influencerName}
+            </p>
+          )}
           {stream.totalViews !== undefined && (
             <p className="text-xs text-gray-500 flex items-center">
               <svg

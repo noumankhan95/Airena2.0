@@ -57,8 +57,6 @@ function AdminPage() {
       sx={{
         padding: 4,
         minHeight: "100vh",
-        backgroundColor: "background.default",
-        color: "text.primary",
       }}
     >
       <Typography

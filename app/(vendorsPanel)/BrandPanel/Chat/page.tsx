@@ -246,9 +246,9 @@ export default function Chat() {
             <Button
               type="submit"
               disabled={loading}
-              className={`px-4 py-2 rounded-lg ${
-                loading ? "bg-gray-500 cursor-not-allowed" : "bg-green-500"
-              }`}
+              className={`px-4 py-2 rounded-lg
+                !ml-2
+                ${loading ? "bg-gray-500 cursor-not-allowed" : "bg-green-500"}`}
               onClick={sendMessage}
             >
               {loading ? (

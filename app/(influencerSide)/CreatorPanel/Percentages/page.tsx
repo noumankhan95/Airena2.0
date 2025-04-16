@@ -18,6 +18,7 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Typography,
 } from "@mui/material";
 import useInfluencersInfo from "@/store/influencerPanel/OwnersInfo";
 
@@ -76,9 +77,9 @@ const InfluencerPercentageApproval = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-semibold mb-4">
+      <Typography variant="h5" className="text-2xl font-semibold mb-4">
         Influencer Percentage Approvals
-      </h2>
+      </Typography>
       <Table>
         <TableHead>
           <TableRow>

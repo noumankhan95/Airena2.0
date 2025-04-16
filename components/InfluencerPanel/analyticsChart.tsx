@@ -115,7 +115,7 @@ const StreamAnalytics = () => {
   }, [uid]);
   console.log(analytics);
   return (
-    <Box sx={{ p: 4, bgcolor: "background.default", borderRadius: 2 }}>
+    <Box sx={{ p: 4, borderRadius: 2 }}>
       <Typography variant="h5" fontWeight="bold" gutterBottom>
         📊 Stream Analytics
       </Typography>

@@ -15,6 +15,7 @@ import {
   Container,
   Dialog,
   DialogContent,
+  Box,
 } from "@mui/material";
 import useInfluencersInfo from "@/store/influencerPanel/OwnersInfo";
 import ReactPlayer from "react-player";
@@ -71,8 +72,8 @@ export default function StreamsPage() {
   );
 
   return (
-    <Container className="p-6 bg-gradient-to-b min-h-screen">
-      <Typography variant="h4" className="text-white text-center mb-6">
+    <Box className="p-6  min-h-screen">
+      <Typography variant="h4" className="text-white text-center my-6">
         Discover Amazing Streams
       </Typography>
 
@@ -82,7 +83,7 @@ export default function StreamsPage() {
         placeholder="Search streams, creators, or categories..."
         fullWidth
         onChange={(e) => setSearch(e.target.value)}
-        className="!mb-6 rounded-md text-white"
+        className="!my-6 rounded-md text-white"
         InputProps={{ style: { color: "white" } }}
       />
 
@@ -176,6 +177,6 @@ export default function StreamsPage() {
           )}
         </DialogContent>
       </Dialog>
-    </Container>
+    </Box>
   );
 }

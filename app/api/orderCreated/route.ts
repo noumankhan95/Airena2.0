@@ -179,6 +179,7 @@ export async function POST(req: NextRequest) {
             influencerId: infUid,
             createdAt: payload.created_at,
             vendor,
+            influencerName: influencerDoc.data()?.name,
           }),
           totalOrders: vendorDoc.data().totalOrders + 1,
           totalRevenue:

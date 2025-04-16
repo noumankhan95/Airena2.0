@@ -177,7 +177,11 @@ export default function UploadVideo() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ bgcolor: "#000", color: "white", py: 4 }}>
+    <Container
+      maxWidth="md"
+      sx={{ bgcolor: "#000", color: "white", py: 4, my: 5 }}
+      className="rounded-md"
+    >
       <Typography variant="h4" fontWeight="bold" textAlign="center" mb={2}>
         Upload Video
       </Typography>
@@ -227,7 +231,6 @@ export default function UploadVideo() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         sx={{
-          bgcolor: "#222",
           borderRadius: "5px",
           mb: 3,
           input: { color: "white" },
@@ -243,7 +246,6 @@ export default function UploadVideo() {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         sx={{
-          bgcolor: "#222",
           borderRadius: "5px",
           mb: 3,
           input: { color: "white" },
@@ -316,7 +318,6 @@ export default function UploadVideo() {
         value={tags}
         onChange={(e) => setTags(e.target.value)}
         sx={{
-          bgcolor: "#222",
           borderRadius: "5px",
           mb: 3,
           input: { color: "white" },

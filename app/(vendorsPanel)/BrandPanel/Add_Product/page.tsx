@@ -160,11 +160,11 @@ export default function ProductUploadForm() {
   };
   console.log("dormData", formData);
   return (
-    <Container>
+    <Container sx={{ backgroundColor: "transparent" }}>
       <Typography variant="h4" className="mb-4">
         Upload Product
       </Typography>
-      <Paper className="p-4 mb-4" elevation={4}>
+      <Paper className="p-4 mb-4 rounded-lg" elevation={4}>
         <Box className="flex flex-col gap-4">
           <TextField
             label="Title"
@@ -215,7 +215,7 @@ export default function ProductUploadForm() {
       </Typography>
 
       {formData.variants.map((variant, index) => (
-        <Paper key={variant.id} className="p-4 mb-4" elevation={2}>
+        <Paper key={variant.id} className="p-4 mb-4 rounded-lg" elevation={2}>
           <Box className="flex flex-col gap-2">
             <TextField
               label="Size"

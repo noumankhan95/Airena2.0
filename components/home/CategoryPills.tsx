@@ -428,7 +428,8 @@ const StreamCard = ({ stream }: any) => {
   return (
     <Link
       href={`/watch/${stream.playbackId}`}
-      className="block bg-gray-900 rounded-lg overflow-hidden hover:bg-gray-800 transition duration-300 border border-green-500/20 hover:border-green-500/50 hover:shadow-lg hover:shadow-green-500/10 group"
+      className="block  rounded-lg overflow-hidden transition duration-300   hover:border-green-500/50 hover:shadow-lg group"
+      style={{ backgroundColor: "#0F0F0F" }}
       onClick={async () => {
         if (uid) {
           await setDoc(
@@ -442,7 +443,7 @@ const StreamCard = ({ stream }: any) => {
       }}
     >
       <div className="aspect-video relative">
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+        <div className="absolute inset-0  flex items-center justify-center">
           <div className="relative w-full h-full">
             <Image
               src={stream.thumbnail || "/placeholders/stream-thumbnail.jpg"}
@@ -459,7 +460,10 @@ const StreamCard = ({ stream }: any) => {
 
           {/* Live indicator */}
           {stream.isActive && (
-            <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full flex items-center z-10">
+            <div
+              className="absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-full flex items-center z-10"
+              style={{ backgroundColor: "#46C190", color: "black" }}
+            >
               <RadioIcon className="w-3 h-3 mr-1 animate-pulse" />
               LIVE
             </div>
@@ -488,7 +492,9 @@ const StreamCard = ({ stream }: any) => {
       <div className="p-3">
         <h3 className="font-medium text-white truncate">{stream.title}</h3>
         <div className="flex items-center justify-between mt-2">
-          <p className="text-sm text-gray-400">{stream.category}</p>
+          <p className="text-sm " style={{ color: "#46C190" }}>
+            {stream.category}
+          </p>
           {stream.totalViews !== undefined && (
             <p className="text-xs text-gray-500 flex items-center">
               <svg
@@ -564,7 +570,7 @@ const GameCategories = () => {
   }, [activeCategory, allStreams]);
 
   return (
-    <div className="w-full bg-black text-white">
+    <div className="w-full  text-white">
       {loading ? (
         <div className="text-center py-8">
           <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-green-500 border-r-transparent"></div>
@@ -593,7 +599,7 @@ const GameCategories = () => {
                 ))}
               </div>
             ) : (
-              <div className="bg-gray-900/50 rounded-lg p-8 text-center border border-green-500/20">
+              <div className=" rounded-lg p-8 text-center border border-green-500/20">
                 <p className="text-gray-400">
                   No Live streams currently available in this category.
                 </p>

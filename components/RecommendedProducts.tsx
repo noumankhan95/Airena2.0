@@ -163,7 +163,6 @@ export default function ProductFetcher() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          mt: 4,
           minHeight: "100vh",
         }}
       >

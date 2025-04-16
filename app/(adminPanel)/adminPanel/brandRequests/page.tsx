@@ -168,14 +168,17 @@ const AdminSellersTable = () => {
                     sx={{ mr: 1 }}
                     onClick={() => handleOpen(seller)}
                   >
-                    Show Details
+                    View Details
                   </Button>
-                  <IconButton
-                    color="error"
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ mr: 1 }}
                     onClick={() => handleDeleteDialogOpen(seller)}
+                    startIcon={<DeleteIcon />}
                   >
-                    <DeleteIcon />
-                  </IconButton>
+                    Reject Request
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

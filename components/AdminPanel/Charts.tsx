@@ -30,7 +30,7 @@ export default function ShopifyAnalytics() {
   if (!analytics) return <p className="text-white">Loading analytics...</p>;
 
   return (
-    <div className="p-4 bg-black text-white">
+    <div className="p-4  text-white">
       {/* Filter Selection */}
       <div className="mb-4 flex items-center gap-4">
         <span className="text-lg font-semibold">Filter by:</span>

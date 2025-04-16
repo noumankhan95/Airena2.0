@@ -49,7 +49,7 @@ export default function NewsletterAdminPage() {
   };
 
   return (
-    <Container maxWidth="md" className="py-10">
+    <Container maxWidth="md" className="py-10" style={{ background: "none" }}>
       <Paper elevation={3} className="p-6 bg-gray-900 text-white !space-y-2">
         <Typography variant="h5" gutterBottom>
           Send Newsletter

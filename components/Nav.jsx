@@ -47,12 +47,11 @@ const Navbar = () => {
 
           </div>
         </Box>
-        <Box className="hidden lg:flex items-center justify-center !space-x-6">
+        <Box className="hidden lg:flex items-center justify-center !space-x-6 relative">
           <SearchBar />
           <HeaderButton />
-
-
         </Box>
+
 
         {/* Mobile Menu Button */}
         <div className="lg:hidden">

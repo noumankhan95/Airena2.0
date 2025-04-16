@@ -310,7 +310,6 @@ export default function DealerAdminPanel({
           component="main"
           sx={{
             flexGrow: 1,
-            backgroundColor: "black",
             mt: { xs: 8, md: 0 }, // Adjust for AppBar height on mobile
           }}
         >

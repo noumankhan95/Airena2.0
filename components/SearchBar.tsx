@@ -77,7 +77,10 @@ export default function SearchBar() {
 
       {/* Suggestions */}
       {filtered.length > 0 && (
-        <List className="absolute w-full  text-black z-50 shadow-md max-h-64 overflow-auto rounded-md">
+        <List
+          className="absolute left-0 right-0 top-full mt-1 bg-black text-black rounded-md shadow-lg z-50 max-h-64 overflow-y-auto"
+          style={{ position: "absolute" }}
+        >
           {filtered.map((stream) => (
             <ListItem
               key={stream.title}

@@ -66,7 +66,7 @@ const CreateAdmin = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 4 }}>
+    <Container maxWidth="sm" sx={{ mt: 4, background: "none" }}>
       <Paper sx={{ padding: 3 }}>
         <Typography variant="h5" gutterBottom>
           Create New Admin

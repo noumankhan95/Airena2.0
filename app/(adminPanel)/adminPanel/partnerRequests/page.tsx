@@ -21,6 +21,7 @@ import {
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
 import { toast } from "react-toastify";
+import { DeleteIcon } from "lucide-react";
 
 interface Partner {
   id: string;
@@ -159,6 +160,7 @@ export default function PartnersPage() {
                       color="error"
                       size="small"
                       onClick={() => handleRejectRequest(partner.id)}
+                      startIcon={<DeleteIcon />}
                     >
                       Reject Request
                     </Button>

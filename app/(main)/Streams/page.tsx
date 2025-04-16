@@ -19,6 +19,7 @@ import {
 import ReactPlayer from "react-player";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+import { CategoryTwoTone } from "@mui/icons-material";
 export default function StreamsPage() {
   const [streams, setStreams] = useState<any[]>([]);
   const [search, setSearch] = useState("");

@@ -3,6 +3,7 @@ import { auth, db } from "@/firebase";
 import useOwnersStore from "@/store/dealersPanel/OwnersInfo";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { UserIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
@@ -32,9 +33,9 @@ function HeaderButton() {
   return (
     <Link
       href={uid ? "/user/myAccount" : "/Authenticate/SignIn"}
-      className="border border-green-500/70 text-white px-6 py-2 rounded-md hover:bg-green-500/10 transition duration-300"
+      className="text-white rounded-full  hover:bg-green-500/10 transition duration-300"
     >
-      {uid ? "My Account" : "Login"}
+      <UserIcon className="w-6 h-6" />
     </Link>
   );
 }

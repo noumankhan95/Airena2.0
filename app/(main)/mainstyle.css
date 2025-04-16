@@ -24,7 +24,7 @@
 /* globals.css */
 
 /* Reset some defaults */
-body {
+/* body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -32,10 +32,10 @@ body {
   width: 100%;
   position: relative;
   isolation: isolate;
-}
+} */
 
 /* Only background rotates */
-body::before {
+/* body::before {
   content: "";
   position: fixed;
   top: 0;
@@ -45,12 +45,11 @@ body::before {
   background: linear-gradient(
     to right,
     rgba(17, 46, 35, 0.9) 0%,
-    /* Darker green with opacity */ rgba(0, 0, 0, 1) 50%,
-    /* Full black at center */ rgba(17, 46, 35, 0.9) 100%
-      /* Darker green with opacity */
-  );
-  transform: scale(2.1) rotate(35deg); /* Scaling and rotating the gradient */
-  transform-origin: center center; /* Ensures rotation happens around the center */
-  z-index: -1; /* Keeps it behind the content */
-  pointer-events: none; /* Makes sure it doesn't block interactions */
-}
+    rgba(0, 0, 0, 1) 50%,
+    rgba(17, 46, 35, 0.9) 100%
+  ); */
+/* transform: scale(2.1) rotate(35deg); 
+  transform-origin: center center; 
+  z-index: -1;
+  pointer-events: none;
+} */

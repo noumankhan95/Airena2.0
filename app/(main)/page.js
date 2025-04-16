@@ -49,11 +49,11 @@ export default function Home() {
             Browse Categories
           </Typography>
 
-          <div className="flex justify-around py-5" >
+          <div className="flex flex-col lg:flex-row gap-2 justify-around py-5" >
             {/* Gaming Card */}
             <Card
-              className="p-6 shadow-lg flex flex-col items-start cursor-pointer transform transition-all duration-300 shadow-green-400"
-              style={{ backgroundColor: "#050505", width: '25%', height: "40%" }}
+              className="p-6 shadow-lg flex flex-col w-full lg:w-3/5 items-start cursor-pointer transform transition-all duration-300 shadow-green-400"
+              style={{ backgroundColor: "#050505" }}
               onClick={() => { router.push("/Categories") }}
             >
               <FaGamepad
@@ -70,8 +70,8 @@ export default function Home() {
 
             {/* Sports Card */}
             <Card
-              className="p-6 shadow-lg flex flex-col items-start cursor-pointer transform transition-all duration-300 shadow-green-400"
-              style={{ backgroundColor: "#050505", width: '25%', height: "40%" }}
+              className="p-6 shadow-lg flex flex-col w-full lg:w-3/5 items-start cursor-pointer transform transition-all duration-300 shadow-green-400"
+              style={{ backgroundColor: "#050505" }}
               onClick={() => { router.push("/Categories") }}
             >
               <FaFootballBall

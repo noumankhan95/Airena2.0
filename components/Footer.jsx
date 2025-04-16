@@ -34,11 +34,12 @@ export default function Footer() {
                         <Typography variant="body2" sx={{ mb: 1 }}>
                             <Link href="/CreatorPanel" style={{ color: "inherit", textDecoration: "none" }}>
                                 Creator Dashboard
-                            </Link>{" "}
-                            •{" "}
+                            </Link>{" "} {" "}
+                            •{" "} {" "}
                             <Link href="/CreatorOnboarding" style={{ color: "inherit", textDecoration: "none" }}>
                                 Creator Partnership
                             </Link>
+                            •{" "} {" "}
                             <Link href="/BrandOnboarding" style={{ color: "inherit", textDecoration: "none" }}>
                                 Brand Partnership
                             </Link>
@@ -90,12 +91,12 @@ export default function Footer() {
                     <Box>
                         <Link href="/TermsAndConditions" className="text-gray-500 visited:text-gray-500 no-underline">
                             Terms of Service
-                        </Link>{" "}
-                        •{" "}
+                        </Link>{" "} {" "}
+                        •{" "} {" "}
                         <Link href="/PrivacyPolicy" className="text-gray-500 visited:text-gray-500 no-underline">
                             Privacy Policy
-                        </Link>{" "}
-                        •{" "}
+                        </Link>{" "} {" "}
+                        •{" "} {" "}
                         <Link href="/about" className="text-gray-500 visited:text-gray-500 no-underline">
                             About Us
                         </Link>

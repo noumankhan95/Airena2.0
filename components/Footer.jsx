@@ -36,6 +36,9 @@ export default function Footer() {
                                 Creator Dashboard
                             </Link>{" "}
                             •{" "}
+                            <Link href="/CreatorOnboarding" style={{ color: "inherit", textDecoration: "none" }}>
+                                Creator Partnership
+                            </Link>
                             <Link href="/BrandOnboarding" style={{ color: "inherit", textDecoration: "none" }}>
                                 Brand Partnership
                             </Link>

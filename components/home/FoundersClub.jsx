@@ -139,11 +139,8 @@ const FoundersClub = () => {
                 <Crown className="h-10 w-10 sm:h-12 sm:w-12 text-green-400" />
               </motion.div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3">
-                Join the Founders' Club
+                Join the Creators Club
               </h2>
-              <p className="text-sm sm:text-base text-gray-400 mb-6 sm:mb-8">
-                Be among the first 200 content creators to shape the future of Airena
-              </p>
               <motion.form
                 onSubmit={handleSubmit}
                 className="max-w-lg mx-auto text-left"
@@ -213,7 +210,6 @@ const FoundersClub = () => {
                     )}
                   </Button>
 
-                  <p className="text-2xs sm:text-xs text-gray-500 mt-4 sm:mt-5">Only 200 spots available</p>
                 </div>
               </motion.form>
             </div>

@@ -91,25 +91,6 @@ export default function Home() {
 
       <div id="categorypills" className=" p-6">
         <CategoryPills />
-
-        {/* <div className="max-w-6xl mx-auto px-4 py-8">
-            <TournamentCard />
-          </div> */}
-        {/* <VideoSec /> */}
-
-        {/* <TournamentMatchup /> */}
-
-
-
-        <FoundersClub />
-
-        {/* <LeaderboardSection /> */}
-
-        {/* <VideoSlider /> */}
-
-        {/* <VideoSection withPagination={true} /> */}
-
-        {/* <EventsSection /> */}
       </div>
 
       {/* <footer className="bg-black py-8 border-t border-gray-900">

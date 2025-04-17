@@ -204,6 +204,14 @@ export default function UploadVideo() {
           mb: 3,
         }}
         component="label"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={(e) => {
+          e.preventDefault();
+          const file = e.dataTransfer.files[0];
+          if (file && file.type.startsWith("video/")) {
+            handleFileChange({ target: { files: [file] } });
+          }
+        }}
       >
         <CloudUploadIcon sx={{ fontSize: 40, mb: 1, color: "gray" }} />
         <Typography variant="body2" color="gray">
@@ -265,6 +273,14 @@ export default function UploadVideo() {
           mb: 3,
         }}
         component="label"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={(e) => {
+          e.preventDefault();
+          const file = e.dataTransfer.files[0];
+          if (file && file.type.startsWith("image/")) {
+            handleThumbnailChange({ target: { files: [file] } });
+          }
+        }}
       >
         <CloudUploadIcon sx={{ fontSize: 40, mb: 1, color: "gray" }} />
         <Typography variant="body2" color="gray">

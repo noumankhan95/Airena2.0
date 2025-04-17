@@ -1,5 +1,4 @@
 import React from 'react';
-import { Trophy } from 'lucide-react';
 
 const leaderboardData = [
   { rank: '# 1', player: 'ProGamer123', score: 2500, prize: '$10,000' },
@@ -11,18 +10,15 @@ const leaderboardData = [
 
 const LeaderboardSection = () => {
   return (
-    <div className="bg-black text-white p-3 sm:p-4 md:p-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-4 sm:mb-6">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Tournament Leaderboard</h2>
-          <Trophy className="h-5 w-8 sm:h-6 sm:w-10 text-green-400" />
-        </div>
-        
+    <div className="bg-black text-white p-3 sm:p-4 md:p-6 w-1/2">
+      <div className=" mx-auto">
+
+
         {/* Table with border gradient effect */}
         <div className="relative">
           {/* Glow effect around table borders */}
           <div className="absolute -inset-1 bg-green-800/30 blur-md rounded-lg" />
-          
+
           <div className="relative overflow-x-auto rounded-lg bg-black border border-gray-800/50">
             <table className="w-full">
               <thead>
@@ -35,8 +31,8 @@ const LeaderboardSection = () => {
               </thead>
               <tbody className="divide-y divide-gray-800/50">
                 {leaderboardData.map((item, index) => (
-                  <tr 
-                    key={index} 
+                  <tr
+                    key={index}
                     className={`${index < 3 ? 'bg-green-900/20' : ''}`}
                   >
                     <td className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4">

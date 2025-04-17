@@ -4,11 +4,12 @@ import Image from "next/image";
 
 import Navbar from "@/components/Nav";
 import Hero from "@/components/Hero";
+import { Trophy } from 'lucide-react';
 
 import TournamentMatchup from "@/components/Onevone";
-
+import LeaderboardSection from '@/components/home/LeaderboardSection';
 import React, { useEffect } from 'react';
-
+import TrendingStreams from "@/components/home/TrendingStreams";
 import CategoryPills from '@/components/home/CategoryPills';
 import SHero from "@/components/Secondhero";
 import VideoSec from "@/components/Videosec";
@@ -90,7 +91,17 @@ export default function Home() {
 
 
       <div id="categorypills" className=" p-6">
-        <CategoryPills />
+        {/* <CategoryPills /> */}
+        {/* <div className="flex items-center  mb-4 sm:mb-6">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Tournament Leaderboard</h2>
+          <Trophy className="h-5 w-8 sm:h-6 sm:w-10 text-green-400" />
+        </div> */}
+        <Box className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+
+          <LeaderboardSection />
+          <LeaderboardSection />
+        </Box>
+        <TrendingStreams />
       </div>
 
       {/* <footer className="bg-black py-8 border-t border-gray-900">

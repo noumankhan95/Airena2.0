@@ -65,7 +65,7 @@ export async function GET(req: NextRequest) {
               }
             }
           `,
-          variables: { first: 100, after },
+          variables: { first: 250, after },
         }),
       }
     );

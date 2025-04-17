@@ -9,6 +9,8 @@ import {
   Container,
   InputAdornment,
   IconButton,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 import {
   createUserWithEmailAndPassword,
@@ -37,7 +39,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [subscribe, setSubscribe] = useState(true);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -60,7 +62,15 @@ const SignUp = () => {
         email,
         createdAt: serverTimestamp(),
       });
+      if (subscribe) {
+        const res = await fetch("/api/NewsLetterSubscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
 
+        const data = await res.json();
+      }
       toast.update(id, {
         render: "Account Created Successfully!",
         type: "success",
@@ -220,6 +230,17 @@ const SignUp = () => {
                 </InputAdornment>
               ),
             }}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={subscribe}
+                onChange={(e) => setSubscribe(e.target.checked)}
+                sx={{ color: "white" }}
+              />
+            }
+            label="Subscribe to our newsletter"
+            sx={{ color: "white", mt: 2 }}
           />
           <Box className="flex items-center justify-center !space-x-2">
             <Button

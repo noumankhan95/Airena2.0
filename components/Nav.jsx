@@ -14,11 +14,11 @@ const Navbar = () => {
 
   return (
     <nav className="bg-black text-white border-b border-b-green-500/20">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div className="container mx-auto px-6 py-1 flex justify-between items-center">
         {/* Logo */}
         <Box className="flex items-center justify-center">
           <Link href="/" className="flex items-center mr-12">
-            <Image src="/logo.png" alt="Arena Logo" width={120} height={40} />
+            <Image src="/logo.png" alt="Arena Logo" width={150} height={80} />
           </Link>
 
           {/* Desktop Menu - Right Aligned */}

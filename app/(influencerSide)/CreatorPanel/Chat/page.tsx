@@ -191,7 +191,7 @@ export default function Chat() {
         <div className="flex flex-col w-3/4 p-4 my-1">
           {/* Chat Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-2">
-            {messages.map((msg: any, index: number) => (
+            {messages?.map((msg: any, index: number) => (
               <div
                 key={index}
                 className={`max-w-xs p-3 rounded-lg flex flex-col ${
@@ -202,10 +202,24 @@ export default function Chat() {
                   color: msg.sender === uid ? "black" : "white",
                 }}
               >
-                {msg.text && <p>{msg.text}</p>}
+                {msg.text && (
+                  <p
+                    style={{
+                      color: msg.sender === uid ? "gray" : "white",
+                      fontSize: "18px",
+                    }}
+                  >
+                    {msg.text}
+                  </p>
+                )}
 
                 {msg.timestamp && (
-                  <p style={{ color: msg.sender === uid ? "gray" : "white" }}>
+                  <p
+                    style={{
+                      color: msg.sender === uid ? "gray" : "white",
+                      fontSize: "12px",
+                    }}
+                  >
                     {new Date(msg.timestamp)?.toLocaleDateString() +
                       "  " +
                       new Date(msg.timestamp)?.toLocaleTimeString()}

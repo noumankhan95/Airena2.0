@@ -205,10 +205,24 @@ export default function Chat() {
                   color: msg.sender === uid ? "black" : "white",
                 }}
               >
-                {msg.text && <p>{msg.text}</p>}
+                {msg.text && (
+                  <p
+                    style={{
+                      color: msg.sender === uid ? "gray" : "white",
+                      fontSize: "18px",
+                    }}
+                  >
+                    {msg.text}
+                  </p>
+                )}
 
                 {msg.timestamp && (
-                  <p style={{ color: msg.sender === uid ? "gray" : "white" }}>
+                  <p
+                    style={{
+                      color: msg.sender === uid ? "gray" : "white",
+                      fontSize: "12px",
+                    }}
+                  >
                     {new Date(msg.timestamp)?.toLocaleDateString() +
                       "  " +
                       new Date(msg.timestamp)?.toLocaleTimeString()}

@@ -75,10 +75,14 @@ const Navbar = () => {
         isOpen && (
           <Box className="flex flex-col items-center justify-center lg:hidden bg-black absolute w-full py-4 shadow-lg z-50">
             <ul className="text-center space-y-4">
+              <li>
+                <div className="flex justify-center">
+                  <SearchBar />
+                </div>
+              </li>
               {[
-                { name: "About", href: "/about" },
-                // { name: "Become A Partner", href: "/becomePartnered" },
                 { name: "Blogs", href: "/blogs" },
+                { name: "Streams", href: "/Streams" },
                 { name: "Our Products", href: "/Products" },
                 { name: "Contact", href: "/contact" },
               ].map((item) => (
@@ -92,6 +96,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
+
               <li>
                 <div className="flex justify-center">
                   <HeaderButton />

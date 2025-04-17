@@ -491,17 +491,17 @@ const StreamCard = ({ stream }: any) => {
 
       <div className="p-3">
         <h3 className="font-medium text-white truncate">{stream.title}</h3>
-        <div className="flex items-center justify-between mt-2">
+        <div className="flex flex-col lg:flex-row items-start justify-between mt-2">
           <p className="text-sm " style={{ color: "#46C190" }}>
             {stream.category}
           </p>
           {stream?.influencerName && (
-            <p className="text-sm " style={{ color: "#46C190" }}>
+            <p className="text-xs lg:text-sm " style={{ color: "#46C190" }}>
               By {stream.influencerName}
             </p>
           )}
           {stream.totalViews !== undefined && (
-            <p className="text-xs text-gray-500 flex items-center">
+            <p className="text-xs lg:text-sm  text-gray-500 flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-3 w-3 mr-1"

@@ -447,7 +447,7 @@ const StreamCard = ({ stream }: any) => {
           <div className="relative w-full h-full">
             <Image
               src={
-                stream.thumbnail ||
+                stream.thumbnailUrl ||
                 stream.category === "gaming" ||
                 stream.category === "Gaming"
                   ? "/gaming-background.jpg"

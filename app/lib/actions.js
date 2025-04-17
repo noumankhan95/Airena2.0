@@ -8,7 +8,7 @@ import { db, messaging } from '@/firebase'; // Adjust path if necessary
 import { collection, doc, setDoc, getDocs, updateDoc, getDoc } from 'firebase/firestore';
 import { isAbortError } from "livepeer/lib/http";
 import { isAccessor } from "typescript";
-
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const livepeer = new Livepeer({
     apiKey: process.env.NEXT_PUBLIC_LIVEPEER_API_KEY,
 });
@@ -66,7 +66,8 @@ export const getAllStreams = async () => {
                         title: streamData.title,
                         category: streamData.category,
                         isActive: streamData.Isactive,
-                        playbackId: streamData.playbackId
+                        playbackId: streamData.playbackId,
+                        thumbnailUrl: streamData.thumbnailUrl
                     });
                 }
             });
@@ -102,12 +103,19 @@ export const createStream = async (formData) => {
         const category = formData.get('category');
         const influencerId = formData.get('influencerId'); // Get influencer ID from form data
         const influencerName = formData.get("influencerName")
+        const thumbnailFile = formData.get("thumbnail");
         if (!influencerId) {
             throw new Error('Influencer ID is required');
         }
 
         stream = (await livepeer.stream.create({ name: formData.get('title') })).stream;
-        console.log("Stream in action", stream)
+        let thumbnailUrl = "";
+        if (thumbnailFile && typeof thumbnailFile.name === "string") {
+            const storage = getStorage();
+            const storageRef = ref(storage, `thumbnails/${stream.id}/${thumbnailFile.name}`);
+            await uploadBytes(storageRef, thumbnailFile);
+            thumbnailUrl = await getDownloadURL(storageRef);
+        }
         // Create a new stream document under the influencer's document
         const streamData = {
             influencerId,
@@ -125,7 +133,8 @@ export const createStream = async (formData) => {
             totalViews: 0, // Initialize total views
             streamDuration: 0, // Initialize stream duration in seconds
             streamStartTime: null, // Will be set when stream becomes active
-            lastActiveTime: null // Will be updated periodically
+            lastActiveTime: null, // Will be updated periodically
+            thumbnailUrl // Store the thumbnail URL here
         };
 
         // Store stream data in Firestore under the influencer's document

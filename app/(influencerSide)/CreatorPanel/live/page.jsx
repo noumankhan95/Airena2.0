@@ -3,7 +3,7 @@
 import { createStream } from "../../../lib/actions";
 import useInfluencersInfo from "@/store/influencerPanel/OwnersInfo";
 import { Box, Card } from "@mui/material";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 function LivePage() {
   const { uid, name } = useInfluencersInfo();
@@ -19,7 +19,16 @@ function LivePage() {
       toast.error('Please wait while we load your account information...');
       return;
     }
+    const file = formData.get('thumbnail');
+    if (file && file.size > 1024 * 1024) {
+      toast.error("Thumbnail size should not exceed 1MB");
+      return;
+    }
 
+    if (!uid) {
+      toast.error('Please wait while we load your account information...');
+      return;
+    }
     await fetch("/api/sendNotifications", {
       method: "POST",
       body: JSON.stringify({
@@ -78,7 +87,18 @@ function LivePage() {
               placeholder="Enter your stream title..."
             />
           </div>
-
+          <div>
+            <label htmlFor="thumbnail" className="block text-sm font-medium text-gray-400">
+              Stream Thumbnail (optional)
+            </label>
+            <input
+              id="thumbnail"
+              name="thumbnail"
+              type="file"
+              accept="image/*"
+              className="mt-1 block w-full px-4 py-2 bg-[#111D14] text-white border border-gray-600 rounded-lg"
+            />
+          </div>
           <div>
             <label htmlFor="category" className="block text-sm font-medium text-gray-400">
               Stream Category

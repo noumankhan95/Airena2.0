@@ -9,7 +9,7 @@ import useOwnersStore from "@/store/dealersPanel/OwnersInfo";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "@/firebase";
 import { arrayUnion, doc, getDoc, setDoc } from "firebase/firestore";
-
+import { useSearchParams } from "next/navigation";
 // Main category tabs at the top
 const MainCategoryTabs = ({
   activeMainCategory,
@@ -424,7 +424,7 @@ const StreamCard = ({ stream }: any) => {
       } catch (e) {}
     });
   }, []);
-  console.log("stream", stream);
+  console.log("stream", stream.thumbnailUrl);
   return (
     <Link
       href={`/watch/${stream.playbackId}`}
@@ -446,21 +446,11 @@ const StreamCard = ({ stream }: any) => {
         <div className="absolute inset-0  flex items-center justify-center">
           <div className="relative w-full h-full">
             <Image
-              src={
-                stream.thumbnail ||
-                stream.category === "gaming" ||
-                stream.category === "Gaming"
-                  ? "/gaming-background.jpg"
-                  : "/gaming-background3.jpg"
-              }
+              src={stream.thumbnailUrl || "/gaming-background3.jpg"}
               alt={stream.title}
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
               className="object-cover z-0 group-hover:scale-105 transition-transform duration-300"
-              onError={(e) => {
-                //@ts-ignore
-                e.target.src = "/placeholders/stream-thumbnail.jpg";
-              }}
             />
           </div>
 
@@ -537,7 +527,8 @@ const TrendingStreams = () => {
   const [allStreams, setAllStreams] = useState({});
   const [loading, setLoading] = useState(true);
   const [filteredStreams, setFilteredStreams] = useState([]);
-
+  const params = useSearchParams();
+  const category = params.get("Category");
   // Fetch categories and streams from Firebase
   useEffect(() => {
     const fetchStreams = async () => {
@@ -551,8 +542,13 @@ const TrendingStreams = () => {
         //@ts-ignore
         console.log(allCategories);
         // setCategories(allCategories);
-        //@ts-ignore
-        setFilteredStreams([...streams?.Gaming, ...streams?.Sports]);
+        if (category) {
+          //@ts-ignore
+          setFilteredStreams([...streams[category]] || []);
+        } else {
+          //@ts-ignore
+          setFilteredStreams([...streams?.Gaming, ...streams?.Sports]);
+        }
         // Set initial active category
         // if (allCategories.length > 0) {
         //   const initialCategory = allCategories[0];
@@ -584,14 +580,14 @@ const TrendingStreams = () => {
         </div>
       ) : (
         <>
-          <div className="max-w-screen-xl mx-auto mt-8 p-4">
+          <div className="max-w-screen-xl mx-auto  p-4">
             <h2 className="text-2xl font-bold mb-4 text-green-500">
               Trending Streams
             </h2>
 
             {filteredStreams.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {filteredStreams.map((stream) => (
+                {filteredStreams?.map((stream) => (
                   //@ts-ignore
                   <StreamCard key={stream.id} stream={stream} />
                 ))}

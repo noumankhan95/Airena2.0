@@ -52,7 +52,7 @@ export default function Home() {
             <Card
               className="p-6 shadow-lg flex flex-col w-full lg:w-[30%] items-start cursor-pointer transition-all duration-300 shadow-green-400"
               style={{ backgroundColor: "#050505" }}
-              onClick={() => router.push("/Categories")}
+              onClick={() => router.push("/Categories?Category=Gaming")}
             >
               <FaGamepad className="text-3xl mb-2" style={{ color: "#46C190" }} />
               <Typography
@@ -71,7 +71,7 @@ export default function Home() {
             <Card
               className="p-6 shadow-lg flex flex-col w-full lg:w-[30%] items-start cursor-pointer transition-all duration-300 shadow-green-400"
               style={{ backgroundColor: "#050505" }}
-              onClick={() => router.push("/Categories")}
+              onClick={() => router.push("/Categories?Category=Sports")}
             >
               <FaFootballBall className="text-3xl mb-2" style={{ color: "#46C190" }} />
               <Typography

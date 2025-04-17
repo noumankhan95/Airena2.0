@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-
+import { useRouter } from 'next/navigation';
 const slide = {
   title: 'The Ultimate Gaming & Sports Streaming Platform',
   description: 'Join the next generation of competitive gaming and sports streaming',
@@ -9,13 +9,10 @@ const slide = {
 };
 
 const SHero = () => {
-  const scrollToSection = () => {
-    const section = document.getElementById('join-now-section');
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
+
+
+  const router = useRouter()
   return (
     <section className="relative w-full h-screen bg-black text-white overflow-hidden">
       {/* Background Image */}
@@ -32,7 +29,9 @@ const SHero = () => {
               whileHover={{ scale: 0.9 }}
               whileTap={{ scale: 0.9 }}
               className="bg-green-500 text-black font-semibold px-6 py-3 rounded-lg"
-              onClick={scrollToSection} // Scroll function
+              onClick={() => {
+                router.push('/CreatorPanel')
+              }} // Scroll function
             >
               Join Now
             </Button>
@@ -40,7 +39,9 @@ const SHero = () => {
         </div>
       </div>
     </section>
+
   );
-};
+
+}
 
 export default SHero;

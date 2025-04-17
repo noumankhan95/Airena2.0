@@ -446,7 +446,13 @@ const StreamCard = ({ stream }: any) => {
         <div className="absolute inset-0  flex items-center justify-center">
           <div className="relative w-full h-full">
             <Image
-              src={stream.thumbnail || "/placeholders/stream-thumbnail.jpg"}
+              src={
+                stream.thumbnail ||
+                stream.category === "gaming" ||
+                stream.category === "Gaming"
+                  ? "/gaming-background.jpg"
+                  : "/gaming-background3.jpg"
+              }
               alt={stream.title}
               fill
               sizes="(max-width: 768px) 100vw, 33vw"

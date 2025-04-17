@@ -45,11 +45,31 @@ export default async function BlogPage({ searchParams }: any) {
       <Grid container spacing={4}>
         {blogs?.map((blog: any) => (
           <Grid item xs={12} sm={6} md={4} key={blog.id}>
-            <Card sx={{ height: "100%" }}>
-              <CardContent>
-                <Typography variant="h4" sx={{ fontWeight: 600 }}>
+            <Card
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              {blog.thumbnail && (
+                <Box
+                  component="img"
+                  src={blog.thumbnail}
+                  alt="Thumbnail"
+                  sx={{
+                    width: "100%",
+                    height: 180,
+                    objectFit: "cover",
+                  }}
+                />
+              )}
+
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Typography variant="h5" fontWeight={600}>
                   {blog.title}
                 </Typography>
+
                 <Typography
                   variant="body2"
                   color="textSecondary"
@@ -66,28 +86,29 @@ export default async function BlogPage({ searchParams }: any) {
                         minute: "numeric",
                       })}
                 </Typography>
+
                 <Typography
                   variant="body2"
                   className="flex items-center justify-start"
-                  sx={{ fontWeight: 400 }}
+                  sx={{ fontWeight: 400, mt: 0.5 }}
                 >
-                  <Pen size={12} className="mr-2" /> {"    By "} {blog.author}
+                  <Pen size={12} className="mr-2" /> By {blog.author}
                 </Typography>
+
                 <Typography
                   variant="body1"
                   color="textPrimary"
                   sx={{ mt: 2 }}
                   dangerouslySetInnerHTML={{
-                    __html: blog.content.substring(0, 200),
+                    __html: blog.content.substring(0, 200) + "...",
                   }}
                 />
               </CardContent>
 
-              <CardActions sx={{ justifyContent: "flex-end" }}>
+              <CardActions sx={{ justifyContent: "flex-end", mt: "auto" }}>
                 <Link href={`/blogs/${blog.id}`} passHref>
                   <Button
                     variant="outlined"
-                    color="primary"
                     sx={{ background: "transparent", color: "green" }}
                   >
                     Read More
@@ -99,9 +120,9 @@ export default async function BlogPage({ searchParams }: any) {
         ))}
       </Grid>
 
-      {/* Pagination */}
-      {nextStartAfter && (
-        <Box sx={{ mt: 4, textAlign: "center" }}>
+      {/* Pagination Button aligned right even if few cards */}
+      <Box display="flex" justifyContent="flex-end" mt={4}>
+        {nextStartAfter && (
           <Link
             href={`/blogs?type=${type}&page=${
               page + 1
@@ -112,8 +133,8 @@ export default async function BlogPage({ searchParams }: any) {
               View More
             </Button>
           </Link>
-        </Box>
-      )}
+        )}
+      </Box>
     </Box>
   );
 }

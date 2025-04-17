@@ -144,6 +144,8 @@ export default function UploadVideo() {
               render: "Upload successful!",
               type: "success",
               isLoading: false,
+              autoClose: 5000,
+              closeButton: true,
             });
 
             // Reset form
@@ -159,6 +161,8 @@ export default function UploadVideo() {
               render: "Error saving video!",
               type: "error",
               isLoading: false,
+              autoClose: 5000,
+              closeButton: true,
             });
           } finally {
             setUploading(false);
@@ -171,6 +175,8 @@ export default function UploadVideo() {
         render: "Unexpected error occurred!",
         type: "error",
         isLoading: false,
+        autoClose: 5000,
+        closeButton: true,
       });
       setUploading(false);
     }
@@ -228,7 +234,7 @@ export default function UploadVideo() {
         />
       </Box>
       {videoFile && (
-        <Typography variant="caption" color="gray" sx={{ mb: 2 }}>
+        <Typography variant="caption" color="gray" sx={{ my: 2 }}>
           Selected: {videoFile.name}
         </Typography>
       )}
@@ -284,7 +290,7 @@ export default function UploadVideo() {
       >
         <CloudUploadIcon sx={{ fontSize: 40, mb: 1, color: "gray" }} />
         <Typography variant="body2" color="gray">
-          Drag and drop video files or Browse
+          Drag and drop Thumbnails or Browse
         </Typography>
         <Typography variant="caption" color="gray">
           Upload Thumbnail
@@ -297,7 +303,7 @@ export default function UploadVideo() {
         />
       </Box>
       {thumbnail && (
-        <Box mt={1} display="flex" alignItems="center" gap={2}>
+        <Box mt={1} display="flex" alignItems="center" gap={2} sx={{ my: 2 }}>
           <img
             src={URL.createObjectURL(thumbnail)}
             alt="Thumbnail Preview"

@@ -9,7 +9,6 @@ import useOwnersStore from "@/store/dealersPanel/OwnersInfo";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "@/firebase";
 import { arrayUnion, doc, getDoc, setDoc } from "firebase/firestore";
-import { useSearchParams } from "next/navigation";
 // Main category tabs at the top
 const MainCategoryTabs = ({
   activeMainCategory,
@@ -521,14 +520,13 @@ const StreamCard = ({ stream }: any) => {
 };
 
 // Full component that combines both category UI elements and shows streams
-const TrendingStreams = () => {
+const TrendingStreams = ({ category }: { category: string }) => {
   const [activeCategory, setActiveCategory] = useState(null);
   //   const [categories, setCategories] = useState([]);
   const [allStreams, setAllStreams] = useState({});
   const [loading, setLoading] = useState(true);
   const [filteredStreams, setFilteredStreams] = useState([]);
-  const params = useSearchParams();
-  const category = params.get("Category");
+
   // Fetch categories and streams from Firebase
   useEffect(() => {
     const fetchStreams = async () => {

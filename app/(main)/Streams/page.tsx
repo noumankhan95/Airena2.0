@@ -15,6 +15,7 @@ import {
   Container,
   Dialog,
   DialogContent,
+  Box,
 } from "@mui/material";
 import ReactPlayer from "react-player";
 import { toast } from "react-toastify";
@@ -167,15 +168,31 @@ export default function StreamsPage() {
             {selectedStream?.title}
           </Typography>
           {videoUrl ? (
-            <div className="aspect-w-16 aspect-h-9 w-full">
+            <Box
+              sx={{
+                width: 640,
+                height: 360,
+                position: "relative",
+                backgroundColor: "black",
+                borderRadius: "8px",
+                overflow: "hidden",
+                margin: "auto",
+              }}
+            >
               <ReactPlayer
                 url={videoUrl}
                 controls
+                playing
                 width="100%"
                 height="100%"
-                playing
+                style={{
+                  objectFit: "contain",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                }}
               />
-            </div>
+            </Box>
           ) : (
             <Typography className="text-white">Loading video...</Typography>
           )}

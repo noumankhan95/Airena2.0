@@ -115,7 +115,7 @@ export default function influencerPanel({
     >
       <List className="flex flex-col items-center justify-center">
         <Toolbar>
-          <Link href="/" className="flex items-center">
+          <Link href="/CreatorPanel" className="flex items-center">
             <Image src="/logo.png" alt="Arena Logo" width={120} height={40} />
           </Link>
         </Toolbar>

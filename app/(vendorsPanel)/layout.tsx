@@ -101,7 +101,7 @@ export default function DealerAdminPanel({
   const drawerContent = (
     <>
       <Toolbar>
-        <Link href="/" className="flex items-center">
+        <Link href="/BrandPanel" className="flex items-center">
           <Image src="/logo.png" alt="Arena Logo" width={120} height={40} />
         </Link>
       </Toolbar>

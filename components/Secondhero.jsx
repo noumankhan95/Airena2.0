@@ -28,10 +28,11 @@ const SHero = () => {
             <Button
               whileHover={{ scale: 0.9 }}
               whileTap={{ scale: 0.9 }}
-              className="bg-green-500 text-black font-semibold px-6 py-3 rounded-lg"
+              className=" text-black font-semibold px-6 py-3 rounded-lg"
               onClick={() => {
                 router.push('/CreatorPanel')
               }} // Scroll function
+              style={{ backgroundColor: "#46C190" }}
             >
               Join Now
             </Button>

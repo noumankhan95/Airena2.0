@@ -10,13 +10,8 @@ import TournamentMatchup from "@/components/Onevone";
 import React, { useEffect } from 'react';
 
 import CategoryPills from '@/components/home/CategoryPills';
-import FoundersClub from '@/components/home/FoundersClub';
-import LeaderboardSection from '@/components/home/LeaderboardSection';
-
-import EventsSection from '@/components/home/EventsSection';
 import SHero from "@/components/Secondhero";
 import VideoSec from "@/components/Videosec";
-
 import VideoSlider from "@/components/VideoSlider";
 import Footer from "@/components/Footer"
 import { Typography } from "@mui/material";
@@ -40,8 +35,6 @@ export default function Home() {
   const router = useRouter()
   return (
     <div className="min-h-screen text-white w-full">
-
-
       <SHero />
       <section className="my-12 p-5 flex justify-center">
         <div className="w-full">

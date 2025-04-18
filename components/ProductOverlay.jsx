@@ -137,35 +137,30 @@ const ProductOverlay = forwardRef(({ products, influencerId }, ref) => {
     if (!products || products.length === 0) return null;
 
     return (
-        <>  <Box
-            sx={{
-                position: "absolute",
-                right: { xs: 8, md: 16 },
-                top: { xs: 1, md: 16 },
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: { xs: 0.2, md: 2 },
-                zIndex: 10,
-                width: { xs: 120, md: 180 }, // <<< Make cards smaller on mobile
-                maxHeight: { xs: "95%", md: "70%" }, // <<< Don't take full height
-                overflowY: "auto", // <<< This makes ONLY products scrollable
-                p: checkoutUrl ? 2 : 0,
-                backgroundColor: checkoutUrl ? "white" : "transparent",
-                borderRadius: 1,
-            }}
-        >
-            {!showFadeInModal && <CircleChevronLeftIcon onClick={() => setshowFadeInModal(true)} color='#46C190' className='opacity-50 hover:opacity-100' />}
-            {showFadeInModal && <CircleChevronRight onClick={() => setshowFadeInModal(false)} color='#46C190' className='opacity-50 hover:opacity-100' />}
+        <>
+            {products.length > 0 && <Box
+                sx={{
+                    position: "absolute",
+                    right: { xs: 8, md: 0 },
+                    top: { xs: 1, md: 12 },
+                    zIndex: 10,
+                    width: 50, // <<< Make cards smaller on mobile
+                    maxHeight: { xs: "95%", md: "70%" }, // <<< Don't take full height
+                    overflowY: "auto", // <<< This makes ONLY products scrollable
+                    p: checkoutUrl ? 2 : 0,
+                    borderRadius: 1,
+                }}
+            >
+                {!showFadeInModal && <CircleChevronLeftIcon onClick={() => setshowFadeInModal(true)} color='#46C190' className='opacity-90 hover:opacity-100 cursor-pointer' />}
+                {showFadeInModal && <CircleChevronRight onClick={() => setshowFadeInModal(false)} color='#46C190' className='opacity-90 hover:opacity-100 cursor-pointer' />}
 
-        </Box>
+            </Box>}
             <Fade in={showFadeInModal}>
                 <Box
                     sx={{
                         position: "absolute",
                         right: { xs: 8, md: 16 },
-                        top: { xs: 2.5, md: 20 },
+                        top: { xs: 25.5, md: 45 },
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -180,21 +175,21 @@ const ProductOverlay = forwardRef(({ products, influencerId }, ref) => {
                         borderRadius: 1,
                     }}
                 >
-                    <Cancel
-                        onClick={
-                            () => { setCheckoutUrl(""); setshowFadeInModal(false) }}
-                        sx={{
-                            cursor: "pointer",
-                            fontSize: { xs: 18, md: 20 },
-                            color: "red",
-                            alignSelf: "flex-end",
-                        }}
-                    />
+
                     {loading ? (
                         <Typography variant="body2">Loading checkout...</Typography>
                     ) : checkoutUrl ? (
                         <>
-
+                            <Cancel
+                                onClick={
+                                    () => { setCheckoutUrl(""); }}
+                                sx={{
+                                    cursor: "pointer",
+                                    fontSize: { xs: 18, md: 20 },
+                                    color: "red",
+                                    alignSelf: "flex-end",
+                                }}
+                            />
                             <QRCodeSVG value={checkoutUrl} size={150} level="Q" />
                             <Typography variant="caption" sx={{ mt: 1, color: "gray" }}>
                                 Scan the QR code to proceed to checkout

@@ -1,7 +1,7 @@
 // components/GlowingBackground.tsx
 const GamingBackground = () => {
   return (
-    <div className="absolute inset-0 -z-10 bg-black">
+    <div className="absolute inset-0 -z-10 bg-black overflow-hidden">
       {/* Top Left Glow */}
       <div className="absolute top-0 left-0 w-40 h-40 bg-emerald-900 opacity-40 blur-2xl rounded-full" />
 

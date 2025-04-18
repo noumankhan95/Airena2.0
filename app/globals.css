@@ -7,6 +7,7 @@ body {
   color: var(--text-color);
   font-family: var(--font-primary);
   transition: background 0.3s ease, color 0.3s ease;
+  box-sizing: border-box;
 }
 
 /* Headings */

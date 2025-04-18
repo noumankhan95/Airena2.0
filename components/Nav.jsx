@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import HeaderButton from "@/components/HeaderButton/Button";
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { UserIcon } from "lucide-react";
 import { Search } from "@mui/icons-material";
 import { SearchIcon } from "lucide-react";
@@ -36,9 +36,20 @@ const Navbar = () => {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-gray-300 hover:text-white transition duration-300"
+                    className="text-white transition duration-300"
                   >
-                    {item.name}
+                    <Typography
+                      sx={{
+                        color: 'white',
+                        "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+                        "&:visited": { color: "#46C190" },
+                        "&:focus": { color: "#46C190" },
+                      }}
+
+                    >
+
+                      {item.name}
+                    </Typography>
                   </Link>
                 </li>
               ))}
@@ -89,10 +100,21 @@ const Navbar = () => {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="block text-gray-300 hover:text-white transition duration-300"
+                    className="block text-white transition duration-300"
                     onClick={() => setIsOpen(false)}
                   >
-                    {item.name}
+                    <Typography
+                      sx={{
+                        color: 'white',
+                        "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+                        "&:visited": { color: "#46C190" },
+                        "&:focus": { color: "#46C190" },
+                      }}
+                      variant="body1"
+                    >
+
+                      {item.name}
+                    </Typography>
                   </Link>
                 </li>
               ))}

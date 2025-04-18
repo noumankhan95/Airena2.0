@@ -33,36 +33,79 @@ export default function Footer() {
                     </Grid>
 
                     {/* Middle Navigation Links */}
-                    <Grid item xs={12} md textAlign="center">
-                        <Typography variant="body2">
-                            <Link href="/CreatorPanel" style={{ color: "inherit", textDecoration: "none" }}>
+                    <Grid item xs={12} md textAlign="center" className="flex flex-row items-center !justify-center gap-1 lg:gap-4">
+                        <Link href="/CreatorPanel" style={{ color: "inherit", textDecoration: "none" }}>
+                            <Typography variant="body2" sx={{
+                                "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+                                "&:visited": { color: "#46C190" },
+                                "&:focus": { color: "#46C190" },
+                            }} >
                                 Creator Dashboard
-                            </Link>{" "}
-                            •{" "}
-                            <Link href="/CreatorOnboarding" style={{ color: "inherit", textDecoration: "none" }}>
+                            </Typography>
+
+                        </Link>{" "}
+                        •{" "}
+                        <Link href="/CreatorOnboarding" style={{ color: "inherit", textDecoration: "none" }}>
+                            <Typography variant="body2" sx={{
+
+                                "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+                                "&:visited": { color: "#46C190" },
+                                "&:focus": { color: "#46C190" },
+                            }} >
                                 Creator Partnership
-                            </Link>{" "}
-                            •{" "}
-                            <Link href="/BrandOnboarding" style={{ color: "inherit", textDecoration: "none" }}>
+                            </Typography>
+
+                        </Link>{" "}
+                        •{" "}
+                        <Link href="/BrandOnboarding" style={{ color: "inherit", textDecoration: "none" }}>
+                            <Typography variant="body2" sx={{
+
+                                "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+                                "&:visited": { color: "#46C190" },
+                                "&:focus": { color: "#46C190" },
+                            }} >
                                 Brand Partnership
-                            </Link>{" "}
-                            •{" "}
-                            <Link href="/BrandPanel" style={{ color: "inherit", textDecoration: "none" }}>
+                            </Typography>
+
+                        </Link>{" "}
+                        •{" "}
+                        <Link href="/BrandPanel" style={{ color: "inherit", textDecoration: "none" }}>
+                            <Typography variant="body2" sx={{
+
+                                "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+                                "&:visited": { color: "#46C190" },
+                                "&:focus": { color: "#46C190" },
+                            }} >
                                 Brand Dashboard
-                            </Link>
-                        </Typography>
+                            </Typography>
+                        </Link>
                     </Grid>
 
                     {/* Social Media Icons */}
                     <Grid item xs={12} md="auto">
                         <Box display="flex" justifyContent={{ xs: "center", md: "flex-end" }} gap={1}>
-                            <IconButton href="https://www.linkedin.com/company/105713554/admin/dashboard/" target="_blank" sx={{ color: "#46C190" }}>
+                            <IconButton href="https://www.linkedin.com/company/105713554/admin/dashboard/" target="_blank" sx={{
+                                color: "#46C190",
+                                "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+                                "&:visited": { color: "#46C190" },
+                                "&:focus": { color: "#46C190" },
+                            }} >
                                 <LinkedIn />
                             </IconButton>
-                            <IconButton href="https://www.instagram.com/airena.app" target="_blank" sx={{ color: "#46C190" }}>
+                            <IconButton href="https://www.instagram.com/airena.app" target="_blank" sx={{
+                                color: "#46C190",
+                                "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+                                "&:visited": { color: "#46C190" },
+                                "&:focus": { color: "#46C190" },
+                            }} >
                                 <Instagram />
                             </IconButton>
-                            <IconButton href="https://www.facebook.com/61572648736754/" target="_blank" sx={{ color: "#46C190" }}>
+                            <IconButton href="https://www.facebook.com/61572648736754/" target="_blank" sx={{
+                                color: "#46C190",
+                                "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+                                "&:visited": { color: "#46C190" },
+                                "&:focus": { color: "#46C190" },
+                            }} >
                                 <Facebook />
                             </IconButton>
                         </Box>
@@ -77,15 +120,40 @@ export default function Footer() {
                     <Typography variant="body2" sx={{ opacity: 0.7 }}>
                         © {new Date().getFullYear()} Airena. All rights reserved.
                     </Typography>
-                    <Box display="flex" gap={2}>
+                    <Box display="flex" className="gap-2">
                         <Link href="/TermsAndConditions" className="text-gray-500 no-underline">
-                            Terms of Service
+                            <Typography variant="body2" sx={{
+
+                                "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+                                "&:visited": { color: "#46C190" },
+                                "&:focus": { color: "#46C190" },
+                            }} >
+                                Terms of Service
+                            </Typography>
                         </Link>
                         <Link href="/PrivacyPolicy" className="text-gray-500 no-underline">
-                            Privacy Policy
+                            <Typography variant="body2" sx={{
+
+                                "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+                                "&:visited": { color: "#46C190" },
+                                "&:focus": { color: "#46C190" },
+                            }} >
+
+                                Privacy Policy
+                            </Typography>
+
                         </Link>
                         <Link href="/about" className="text-gray-500 no-underline">
-                            About Us
+                            <Typography variant="body2" sx={{
+
+                                "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+                                "&:visited": { color: "#46C190" },
+                                "&:focus": { color: "#46C190" },
+                            }} >
+
+                                About Us
+                            </Typography>
+
                         </Link>
                     </Box>
                 </Box>

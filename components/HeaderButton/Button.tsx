@@ -1,6 +1,7 @@
 "use client";
 import { auth, db } from "@/firebase";
 import useOwnersStore from "@/store/dealersPanel/OwnersInfo";
+import { Typography } from "@mui/material";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { UserIcon } from "lucide-react";
@@ -35,7 +36,16 @@ function HeaderButton() {
       href={uid ? "/user/myAccount" : "/Authenticate/SignIn"}
       className="text-white rounded-full  hover:bg-green-500/10 transition duration-300"
     >
-      <UserIcon className="w-6 h-6" />
+      <Typography
+        sx={{
+          color: "white",
+          "&:hover": { color: "#46C190", backgroundColor: "transparent" },
+          "&:visited": { color: "#46C190" },
+          "&:focus": { color: "#46C190" },
+        }}
+      >
+        <UserIcon className="w-6 h-6" />
+      </Typography>
     </Link>
   );
 }

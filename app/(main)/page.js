@@ -35,7 +35,7 @@ export default function Home() {
   }, []);
   const router = useRouter()
   return (
-    <div className="min-h-screen text-white w-full">
+    <div className="min-h-screen text-white">
       <SHero />
       <section className="my-12 p-5 flex justify-center">
         <div className="w-full">
@@ -50,7 +50,7 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row lg:justify-around gap-4 py-5">
             {/* Gaming Card */}
             <Card
-              className="p-6 shadow-lg flex flex-col w-full lg:w-[30%] items-start cursor-pointer transition-all duration-300 shadow-green-400"
+              className="p-6 shadow-lg flex flex-col w-full lg:w-[30%] items-start cursor-pointer transition-all duration-300 shadow-green-400 hover:border-2 hover:border-green-700 "
               style={{ backgroundColor: "#050505" }}
               onClick={() => router.push("/Categories?Category=Gaming")}
             >
@@ -69,7 +69,7 @@ export default function Home() {
 
             {/* Sports Card */}
             <Card
-              className="p-6 shadow-lg flex flex-col w-full lg:w-[30%] items-start cursor-pointer transition-all duration-300 shadow-green-400"
+              className="p-6 shadow-lg flex flex-col w-full lg:w-[30%] items-start cursor-pointer transition-all duration-300 shadow-green-400 hover:border-2 hover:border-green-700"
               style={{ backgroundColor: "#050505" }}
               onClick={() => router.push("/Categories?Category=Sports")}
             >

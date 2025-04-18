@@ -84,7 +84,7 @@ const CreateVendorsAccount = () => {
         if (!res.ok) throw await res.json();
         const body = await res.json();
         toast.update(id, {
-          render: "Created Vendor Account",
+          render: "Created Brand Account",
           isLoading: false,
           closeButton: true,
           autoClose: 5000,

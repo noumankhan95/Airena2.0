@@ -86,7 +86,7 @@ const CreateDealersAccount = () => {
         if (!res.ok) throw await res.json();
         const body = await res.json();
         toast.update(id, {
-          render: "Created Influencer Account",
+          render: "Created Creator Account",
           isLoading: false,
           closeButton: true,
           autoClose: 5000,

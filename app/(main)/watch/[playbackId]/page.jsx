@@ -93,10 +93,9 @@ export default async function VideoPage({ params }) {
           </div>
 
           {/* Live Comments Section */}
-          <div className=' rounded-xl border border-gray-700 overflow-hidden'>
+          <Box className=' rounded-xl border border-gray-700 overflow-hidden' sx={{ backgroundColor: '#101111' }}>
             <div className='p-4 border-b border-gray-700'>
-              <h3 className='font-semibold text-lg'>Live Discussion</h3>
-              <p className='text-sm text-gray-400 mt-1'>Join the conversation</p>
+              <h3 className='font-semibold text-lg'>Comments</h3>
             </div>
             <div className='h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800'>
               <LiveComments
@@ -110,16 +109,27 @@ export default async function VideoPage({ params }) {
                 streamId={streamData.streamId}
               />
             </div>
-          </div>
+          </Box>
         </div>
 
         {/* Live Chat Section (Right 1/4 on desktop) */}
-        <div className='lg:col-span-1 flex flex-col gap-4'>
-          <div id='cf_checkout' className=' rounded-xl p-4 border border-gray-700'></div>
-          <div className=' rounded-xl border border-gray-700 overflow-hidden flex-1'>
-            <LiveChat playbackId={playbackId} />
+        <Box className='lg:col-span-1 flex flex-col gap-4 max-h-[480px] rounded-md' sx={{ backgroundColor: '#101111' }} >
+          <div id='cf_checkout' className='p-4 border-b '>Live Chat</div>
+          <div className='rounded-xl  overflow-hidden flex flex-col justify-between flex-1'>
+            <div className='overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800'>
+              <LiveComments
+                influencerId={streamData.influencerId}
+                streamId={streamData.streamId}
+              />
+            </div>
+            <div>
+              <LiveCommentInput
+                influencerId={streamData.influencerId}
+                streamId={streamData.streamId}
+              />
+            </div>
           </div>
-        </div>
+        </Box>
       </div>
 
       {/* Interactive components at bottom */}

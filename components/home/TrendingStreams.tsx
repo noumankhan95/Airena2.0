@@ -4,11 +4,18 @@ import React, { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, RadioIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { getAllStreams } from "@/app/lib/actions";
+import { getAllStreams, getLiveViews } from "@/app/lib/actions";
 import useOwnersStore from "@/store/dealersPanel/OwnersInfo";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "@/firebase";
-import { arrayUnion, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  setDoc,
+} from "firebase/firestore";
 // Main category tabs at the top
 const MainCategoryTabs = ({
   activeMainCategory,
@@ -495,110 +502,154 @@ const StreamCard = ({ stream }: any) => {
               By {stream.influencerName}
             </p>
           )}
-          {stream.totalViews !== undefined && (
-            <p className="text-xs lg:text-sm  text-gray-500 flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-3 w-3 mr-1"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                <path
-                  fillRule="evenodd"
-                  d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              {stream.totalViews} views
-            </p>
-          )}
+          <TotalViews stream={stream.playbackId} />
         </div>
       </div>
     </Link>
   );
 };
 
-// Full component that combines both category UI elements and shows streams
-const TrendingStreams = ({ category }: { category: string }) => {
-  const [activeCategory, setActiveCategory] = useState(null);
-  //   const [categories, setCategories] = useState([]);
-  const [allStreams, setAllStreams] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [filteredStreams, setFilteredStreams] = useState([]);
+function TotalViews({ stream }: any) {
+  const [views, setViews] = useState(0);
 
-  // Fetch categories and streams from Firebase
   useEffect(() => {
-    const fetchStreams = async () => {
-      try {
-        setLoading(true);
-        const streams = await getAllStreams();
-        setAllStreams(streams);
-        console.log(streams);
-        // Extract unique categories
-        const allCategories = Object.keys(streams);
-        //@ts-ignore
-        console.log(allCategories);
-        // setCategories(allCategories);
-        if (category) {
-          //@ts-ignore
-          setFilteredStreams([...streams[category]] || []);
-        } else {
-          //@ts-ignore
-          setFilteredStreams([...streams?.Gaming, ...streams?.Sports]);
-        }
-        // Set initial active category
-        // if (allCategories.length > 0) {
-        //   const initialCategory = allCategories[0];
-
-        //   setActiveCategory(initialCategory);
-        //   //@ts-ignore
-
-        //   setFilteredStreams(streams[initialCategory] || []);
-        // }
-
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching streams:", error);
-        setLoading(false);
-      }
+    const fetchViews = async () => {
+      const liveViews = await getLiveViews(stream);
+      setViews(liveViews);
     };
 
-    fetchStreams();
-  }, []); // Empty dependency array for initial mount only
+    fetchViews();
 
-  // Update filtered streams when activeCategory changes
+    const interval = setInterval(fetchViews, 10000); // Refresh views every 10s
+    return () => clearInterval(interval);
+  }, [stream]);
+  return (
+    <p className="text-xs lg:text-sm  text-gray-500 flex items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-3 w-3 mr-1"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+        <path
+          fillRule="evenodd"
+          d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+          clipRule="evenodd"
+        />
+      </svg>
+      {views || 0} views
+    </p>
+  );
+}
+
+type Stream = {
+  id: string;
+  title: string;
+  name: string;
+  influencerId: string;
+  category: string;
+  isActive: boolean;
+  playbackId: string;
+  thumbnailUrl: string;
+  influencerName: string;
+  totalViews: number;
+};
+
+type StreamsByCategory = {
+  [category: string]: Stream[];
+};
+
+const predefinedCategories = ["Gaming", "Sports"];
+
+const TrendingStreams = ({ category }: { category: string }) => {
+  const [allStreams, setAllStreams] = useState<StreamsByCategory>({});
+  const [filteredStreams, setFilteredStreams] = useState<Stream[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "streams"), (snapshot) => {
+      const groupedStreams: StreamsByCategory = {};
+
+      // Initialize categories
+      predefinedCategories.forEach((cat) => {
+        groupedStreams[cat] = [];
+      });
+
+      snapshot.docs.forEach((influencerDoc) => {
+        const influencerData = influencerDoc.data();
+
+        Object.entries(influencerData).forEach(
+          ([streamId, streamData]: [string, any]) => {
+            if (streamData.Isactive) {
+              let cat = streamData.category?.trim() || "Uncategorized";
+              cat =
+                predefinedCategories.find(
+                  (c) => c.toLowerCase() === cat.toLowerCase()
+                ) || "Uncategorized";
+
+              if (!groupedStreams[cat]) groupedStreams[cat] = [];
+
+              groupedStreams[cat].push({
+                id: streamId,
+                title: streamData.title,
+                name: streamData.title,
+                influencerId: influencerDoc.id,
+                category: streamData.category,
+                isActive: streamData.Isactive,
+                playbackId: streamData.playbackId,
+                thumbnailUrl: streamData.thumbnailUrl,
+                influencerName: streamData.influencerName,
+                totalViews: streamData.totalViews,
+              });
+            }
+          }
+        );
+      });
+
+      setAllStreams(groupedStreams);
+
+      if (category && groupedStreams[category]) {
+        setFilteredStreams([...groupedStreams[category]]);
+      } else {
+        setFilteredStreams([
+          ...(groupedStreams?.Gaming || []),
+          ...(groupedStreams?.Sports || []),
+        ]);
+      }
+
+      setLoading(false);
+    });
+
+    return () => unsubscribe(); // Clean up listener
+  }, [category]);
 
   return (
-    <div className="w-full  text-white">
+    <div className="w-full text-white">
       {loading ? (
         <div className="text-center py-8">
           <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-green-500 border-r-transparent"></div>
           <p className="mt-2 text-green-500">Loading categories...</p>
         </div>
       ) : (
-        <>
-          <div className="max-w-screen-xl mx-auto  p-4">
-            <h2 className="text-2xl font-bold mb-4 text-green-500">
-              Trending Streams
-            </h2>
-
-            {filteredStreams.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {filteredStreams?.map((stream) => (
-                  //@ts-ignore
-                  <StreamCard key={stream.id} stream={stream} />
-                ))}
-              </div>
-            ) : (
-              <div className=" rounded-lg p-8 text-center border border-green-500/20">
-                <p className="text-gray-400">
-                  No Live streams currently available in this category.
-                </p>
-              </div>
-            )}
-          </div>
-        </>
+        <div className="max-w-screen-xl mx-auto p-4">
+          <h2 className="text-2xl font-bold mb-4 text-green-500">
+            Trending Streams
+          </h2>
+          {filteredStreams.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredStreams.map((stream) => (
+                <StreamCard key={stream.id} stream={stream} />
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-lg p-8 text-center border border-green-500/20">
+              <p className="text-gray-400">
+                No Live streams currently available in this category.
+              </p>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

@@ -7,15 +7,15 @@ import { getLiveViews } from '../app/lib/actions';
 
 export default function Views({ playbackId }) {
     const [views, setViews] = useState(0);
-
+   
     useEffect(() => {
         const fetchViews = async () => {
-           const liveViews = getLiveViews(playbackId);
-           setViews(liveViews);
+            const liveViews = getLiveViews(playbackId);
+            setViews(liveViews);
         };
 
         fetchViews();
-        
+
         const interval = setInterval(fetchViews, 10000); // Refresh views every 10s
         return () => clearInterval(interval);
     }, [playbackId]);

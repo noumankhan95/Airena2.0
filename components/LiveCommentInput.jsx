@@ -18,7 +18,7 @@
 //         db, 
 //         `live_comments/${influencerId}/${streamId}`
 //       );
-      
+
 //       await addDoc(commentsRef, {
 //         userId: user.uid,
 //         username: user.displayName || 'Anonymous',
@@ -64,7 +64,8 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/firebase';
 import { useRouter } from 'next/navigation';
 import useOwnersStore from "@/store/dealersPanel/OwnersInfo";
-import { User } from 'lucide-react';
+import { SendIcon, User } from 'lucide-react';
+import { TextField } from '@mui/material';
 
 export default function LiveCommentInput({ influencerId, streamId }) {
   const [commentText, setCommentText] = useState('');
@@ -75,7 +76,7 @@ export default function LiveCommentInput({ influencerId, streamId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!currentUserId) {
       router.push('/user/SignIn');
       return;
@@ -91,10 +92,10 @@ export default function LiveCommentInput({ influencerId, streamId }) {
 
     try {
       const commentsRef = collection(
-        db, 
+        db,
         `live_comments/${influencerId}/${streamId}`
       );
-      
+
       await addDoc(commentsRef, {
         userId: currentUserId,
         username: userName, // Replace with actual username from your store if available
@@ -122,8 +123,8 @@ export default function LiveCommentInput({ influencerId, streamId }) {
       )}
 
       <form onSubmit={handleSubmit}>
-        <div className="flex items-center">
-          <input
+        <div className="flex items-between">
+          <TextField
             type="text"
             value={commentText}
             onChange={(e) => {
@@ -132,15 +133,14 @@ export default function LiveCommentInput({ influencerId, streamId }) {
             }}
             placeholder={currentUserId ? "Add a comment..." : "Sign in to comment"}
             disabled={!currentUserId || isSubmitting}
-            className={`flex-1 px-4 py-2 rounded-full border ${
-              error ? 'border-red-300' : 'border-gray-300'
-            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            className={`flex-1  px-4 py-2 rounded-full border ${error ? 'border-red-300' : 'border-gray-300'
+              } focus:outline-none focus:ring-2 focus:ring-emerald-500`}
             maxLength={200}
           />
           <button
             type="submit"
             disabled={!currentUserId || !commentText.trim() || isSubmitting}
-            className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+            className="ml-2 px-4 py-2 bg-none  text-white rounded-full hover:bg-emerald-600  disabled:cursor-not-allowed transition-colors"
           >
             {isSubmitting ? (
               <span className="inline-flex items-center">
@@ -151,7 +151,7 @@ export default function LiveCommentInput({ influencerId, streamId }) {
                 Posting...
               </span>
             ) : (
-              'Send'
+              <SendIcon color='#46C190' style={{ background: 'none !important' }} />
             )}
           </button>
         </div>

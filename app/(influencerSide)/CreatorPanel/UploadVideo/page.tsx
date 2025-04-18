@@ -61,6 +61,10 @@ export default function UploadVideo() {
       toast.error("Please select a video to upload.");
       return;
     }
+    if (!thumbnail) {
+      toast.error("Please Select a thumbnail To Upload");
+      return;
+    }
     if (!uid) {
       toast.error("You Must be Logged in to perform this action");
       return;

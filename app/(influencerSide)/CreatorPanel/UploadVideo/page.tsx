@@ -98,17 +98,15 @@ export default function UploadVideo() {
 
             // Upload thumbnail if available
             let thumbnailURL = "";
-            if (thumbnail) {
-              const thumbRef = ref(
-                storage,
-                `savedThumbnails/${uid}/${thumbnail.name}`
-              );
-              const thumbSnapshot = await uploadBytesResumable(
-                thumbRef,
-                thumbnail
-              );
-              thumbnailURL = await getDownloadURL(thumbSnapshot.ref);
-            }
+            const thumbRef = ref(
+              storage,
+              `savedThumbnails/${uid}/${thumbnail?.name}`
+            );
+            const thumbSnapshot = await uploadBytesResumable(
+              thumbRef,
+              thumbnail!
+            );
+            thumbnailURL = await getDownloadURL(thumbSnapshot.ref);
 
             // Save video details in Firestore
             const userDocRef = doc(db, "savedStreams", uid); // Reference to user document
@@ -125,6 +123,8 @@ export default function UploadVideo() {
               thumbnailURL,
               createdAt: new Date().toISOString(),
               name,
+              videoName: videoFile?.name,
+              thumbnailName: thumbnail?.name,
             };
             if (!docSnap.exists()) {
               // If user document doesn't exist, create it with the first stream
@@ -356,11 +356,11 @@ export default function UploadVideo() {
           control={<Radio sx={{ color: "white" }} />}
           label="Public - Everyone can watch"
         />
-        <FormControlLabel
+        {/* <FormControlLabel
           value="unlisted"
           control={<Radio sx={{ color: "white" }} />}
           label="Unlisted - Anyone with the link can watch"
-        />
+        /> */}
         <FormControlLabel
           value="private"
           control={<Radio sx={{ color: "white" }} />}

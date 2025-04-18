@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { db, storage } from "@/firebase"; // make sure you export storage from firebase.js
 import { collection, doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, ref } from "firebase/storage";
+import { deleteObject } from "firebase/storage";
+import { setDoc } from "firebase/firestore";
 import {
   Card,
   CardMedia,
@@ -16,6 +18,7 @@ import {
   Dialog,
   DialogContent,
   Box,
+  Button,
 } from "@mui/material";
 import useInfluencersInfo from "@/store/influencerPanel/OwnersInfo";
 import ReactPlayer from "react-player";
@@ -53,12 +56,6 @@ export default function StreamsPage() {
   // Function to handle video fetch and modal opening
   const handleStreamClick = async (stream: any) => {
     try {
-      // if (!stream.videoPath) {
-      //   toast.error("Video path not found");
-      //   return;
-      // }
-      // const videoRef = ref(storage, stream.videoPath);
-      // const url = await getDownloadURL(videoRef);
       setVideoUrl(stream.videoURL);
       setSelectedStream(stream);
     } catch (error) {
@@ -70,6 +67,47 @@ export default function StreamsPage() {
   const filteredStreams = streams?.filter((stream: any) =>
     stream?.title?.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleDeleteStream = async (stream: any) => {
+    if (!uid || !stream) return;
+
+    try {
+      // Step 1: Delete video from Firebase Storage (optional if you store the path)
+      const videoRef = ref(
+        storage,
+        `savedVideos/${uid}/${stream.videoName}`
+      );
+      await deleteObject(videoRef);
+
+      const thumbRef = ref(
+        storage,
+        `savedThumbnails/${uid}/${stream.thumbnailName}`
+      );
+      await deleteObject(thumbRef);
+      // Step 2: Remove stream from Firestore array
+      const userDocRef = doc(db, "savedStreams", uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (userDocSnap.exists()) {
+        const updatedStreams = (userDocSnap.data().streams || []).filter(
+          (item: any) => item.videoURL !== stream.videoURL
+        );
+
+        await setDoc(userDocRef, { streams: updatedStreams });
+        setStreams(updatedStreams);
+
+        toast.success("Stream deleted successfully!");
+      }
+
+      // Step 3: Close modal
+      setSelectedStream(null);
+      setVideoUrl(null);
+    } catch (error) {
+      console.error("Error deleting stream: ", error);
+      toast.error("Failed to delete stream.");
+    }
+  };
+  console.log("STreams", streams);
 
   return (
     <Box className="p-6  min-h-screen">
@@ -163,18 +201,41 @@ export default function StreamsPage() {
             {selectedStream?.title}
           </Typography>
           {videoUrl ? (
-            <div className="aspect-w-16 aspect-h-9 w-full">
+            <Box
+              sx={{
+                position: "relative",
+                backgroundColor: "black",
+                borderRadius: "8px",
+                overflow: "hidden",
+                margin: "auto",
+              }}
+              className="aspect-video p-5 max-w-[640px] mx-auto"
+            >
               <ReactPlayer
                 url={videoUrl}
                 controls
+                playing
                 width="100%"
                 height="100%"
-                playing
+                style={{
+                  objectFit: "contain",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                }}
               />
-            </div>
+            </Box>
           ) : (
             <Typography className="text-white">Loading video...</Typography>
           )}
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => handleDeleteStream(selectedStream)}
+            className="my-4 "
+          >
+            Delete Stream
+          </Button>
         </DialogContent>
       </Dialog>
     </Box>

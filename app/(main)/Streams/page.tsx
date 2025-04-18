@@ -170,14 +170,13 @@ export default function StreamsPage() {
           {videoUrl ? (
             <Box
               sx={{
-                width: 640,
-                height: 360,
                 position: "relative",
                 backgroundColor: "black",
                 borderRadius: "8px",
                 overflow: "hidden",
                 margin: "auto",
               }}
+              className="aspect-video p-5 max-w-[640px] mx-auto"
             >
               <ReactPlayer
                 url={videoUrl}

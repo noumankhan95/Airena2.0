@@ -538,7 +538,7 @@ function TotalViews({ stream }: any) {
           clipRule="evenodd"
         />
       </svg>
-      {views || 0} views
+      {views || 0} viewers
     </p>
   );
 }

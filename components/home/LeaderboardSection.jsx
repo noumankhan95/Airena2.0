@@ -10,7 +10,7 @@ const leaderboardData = [
 
 const LeaderboardSection = () => {
   return (
-    <div className="bg-black text-white p-3 sm:p-4 md:p-6 w-1/2">
+    <div className="bg-black text-white p-3 sm:p-4 md:p-6 w-full lg:w-1/2">
       <div className=" mx-auto">
 
 

@@ -103,7 +103,7 @@ export default function StreamStatusUpdater({ streamId }) {
             ) : (
                 <button
                     onClick={confirmEndStream}
-                    className="w-full px-6 py-3 bg-green-500 text-black rounded-lg font-medium hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-32 px-6 py-3 bg-red-800 text-white rounded-lg font-medium hover:bg-red-1000 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     End Stream
                 </button>

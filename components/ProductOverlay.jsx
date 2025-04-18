@@ -30,7 +30,7 @@ const ProductOverlay = forwardRef(({ products, influencerId }, ref) => {
     const [loading, setLoading] = useState(false);
     const orderCompletionRef = useRef(null);
     const router = useRouter();
-
+    const [showFadeInModal, setshowFadeInModal] = useState(true)
     useImperativeHandle(ref, () => ({
         orderedProducts
     }));
@@ -137,7 +137,7 @@ const ProductOverlay = forwardRef(({ products, influencerId }, ref) => {
 
     return (
         <>
-            <Fade in={true}>
+            <Fade in={showFadeInModal}>
                 <Box
                     sx={{
                         position: "absolute",
@@ -157,19 +157,20 @@ const ProductOverlay = forwardRef(({ products, influencerId }, ref) => {
                         borderRadius: 1,
                     }}
                 >
+                    <Cancel
+                        onClick={() => { setCheckoutUrl(""); setshowFadeInModal(false) }}
+                        sx={{
+                            cursor: "pointer",
+                            fontSize: { xs: 18, md: 20 },
+                            color: "red",
+                            alignSelf: "flex-end",
+                        }}
+                    />
                     {loading ? (
                         <Typography variant="body2">Loading checkout...</Typography>
                     ) : checkoutUrl ? (
                         <>
-                            <Cancel
-                                onClick={() => setCheckoutUrl("")}
-                                sx={{
-                                    cursor: "pointer",
-                                    fontSize: { xs: 18, md: 20 },
-                                    color: "red",
-                                    alignSelf: "flex-end",
-                                }}
-                            />
+
                             <QRCodeSVG value={checkoutUrl} size={150} level="Q" />
                             <Typography variant="caption" sx={{ mt: 1, color: "gray" }}>
                                 Scan the QR code to proceed to checkout
@@ -264,7 +265,6 @@ const ProductOverlay = forwardRef(({ products, influencerId }, ref) => {
                                     </Card>
                                 );
                             })}
-
                         </>
                     )}
                 </Box>

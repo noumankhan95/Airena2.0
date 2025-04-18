@@ -1,13 +1,45 @@
+"use client";
 import React, { useState } from "react";
-import { Card, CardMedia, Typography, Fade } from "@mui/material";
+import { Card, CardMedia, Typography, Fade, Box } from "@mui/material";
+import { CircleChevronLeftIcon, CircleChevronRight } from "lucide-react";
 
 export default function UserProductOverlay({ products, influencerId }: any) {
   if (!products || products.length === 0) return null;
+  const [showFadeInModal, setshowFadeInModal] = useState(true);
 
   return (
     <>
-      <Fade in={true}>
-        <div className="absolute right-4 top-4 flex flex-col gap-2 z-10 max-w-[180px]">
+      {products.length > 0 && (
+        <Box
+          sx={{
+            position: "absolute",
+            right: { xs: 8, md: 0 },
+            top: { xs: 1, md: 12 },
+            zIndex: 10,
+            width: 50, // <<< Make cards smaller on mobile
+            maxHeight: { xs: "95%", md: "70%" }, // <<< Don't take full height
+            overflowY: "auto", // <<< This makes ONLY products scrollable
+            borderRadius: 1,
+          }}
+        >
+          {!showFadeInModal && (
+            <CircleChevronLeftIcon
+              onClick={() => setshowFadeInModal(true)}
+              color="#46C190"
+              className="opacity-90 hover:opacity-100 cursor-pointer"
+            />
+          )}
+          {showFadeInModal && (
+            <CircleChevronRight
+              onClick={() => setshowFadeInModal(false)}
+              color="#46C190"
+              className="opacity-90 hover:opacity-100 cursor-pointer"
+            />
+          )}
+        </Box>
+      )}
+      <Fade in={showFadeInModal}>
+        <div className="absolute right-4 top-20 flex flex-col gap-2 z-10 max-w-[180px]">
           <Typography
             variant="caption"
             component="div"

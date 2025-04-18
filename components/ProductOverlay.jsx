@@ -158,7 +158,8 @@ const ProductOverlay = forwardRef(({ products, influencerId }, ref) => {
                     }}
                 >
                     <Cancel
-                        onClick={() => { setCheckoutUrl(""); setshowFadeInModal(false) }}
+                        onClick={
+                            () => { setCheckoutUrl(""); setshowFadeInModal(false) }}
                         sx={{
                             cursor: "pointer",
                             fontSize: { xs: 18, md: 20 },

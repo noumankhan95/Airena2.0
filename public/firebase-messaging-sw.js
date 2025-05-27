@@ -6,14 +6,13 @@ importScripts(
 );
 
 firebase.initializeApp({
-  apiKey: "AIzaSyBHXcD6u3DGxsfoelHAf_kZIacedTyVzVE",
-  authDomain: "airena-50086.firebaseapp.com",
-  projectId: "airena-50086",
-  storageBucket: "airena-50086.firebasestorage.app",
-  messagingSenderId: "864726257359",
-  appId: "1:864726257359:web:c833d6813b8ced19a071ba",
+  apiKey: "AIzaSyDNRRMi2h9XFQIgk7a8LH1em8jzDzsezPI",
+  authDomain: "airena-1909e.firebaseapp.com",
+  projectId: "airena-1909e",
+  storageBucket: "airena-1909e.firebasestorage.app",
+  messagingSenderId: "1044298914811",
+  appId: "1:1044298914811:web:c5366286cc2793e71f495e",
 });
-  34
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {

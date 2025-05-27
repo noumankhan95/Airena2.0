@@ -22,9 +22,15 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 const storage = getStorage(app);
 const auth = getAuth(app);
-const db = initializeFirestore(app, {
-  localCache: persistentLocalCache({}),
-});
+let db;
+if (!getApps().length) {
+  db = initializeFirestore(app, {
+    localCache: persistentLocalCache({}),
+  });
+} else {
+  db = getFirestore(app);
+}
+
 const database = getDatabase(app);
 
 // Only initialize messaging in the browser
